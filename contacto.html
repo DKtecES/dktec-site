@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacto — DKtec</title>
+<meta name="description" content="Habla con DKtec. Punto único de contacto de todo el ecosistema DKtec / dkagora.ai.">
+<link rel="canonical" href="https://dktec.es/contacto">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<style>
+  /* Modernización 260826 (a petición de Alán: "haz una version para la nueva pagina de dktec") —
+     mismo patrón alternante transparente/opaco ya aplicado en tecnologias.html, servicios-ia.html y
+     gobierno-it.html: el bloque superior ("Contacto"/"Hablemos") pasa a ".transparent-block" (texto
+     claro directamente sobre el verde fijo de la página, sin panel propio) y vuelve a ser un
+     ".page-hero" independiente — se separa del panel del formulario, que ahora es el segundo bloque
+     (opaco) y mantiene su propio blanco para legibilidad. Revierte la fusión de 260730 (ver nota más
+     abajo, que se conserva como historial) porque aquella fusión ya no encaja con el patrón de la
+     "nueva página" usado en el resto del sitio. */
+  .transparent-block.page-hero{
+    background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+    box-shadow:none; padding:0; margin:1rem auto 1.75rem;
+  }
+  .transparent-block > .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block > h1{ color:var(--blanco); }
+  .transparent-block > p{ color:rgba(255,255,255,0.92); }
+
+  /* Panel del formulario sin el dibujo de fondo (260730, a petición de Alán) — solo este bloque;
+     el resto de paneles (page-hero de otras páginas) conservan la imagen. */
+  .form-panel{ background:var(--blanco); }
+</style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<!--
+  GEN-72 · /contacto — punto único de conversión de todo el ecosistema (§6/§9 criterio 6)
+  Ejecuta: Linus · Dirige/supervisa: Alán · Revisa: Melissa (PMO)
+
+  DECISIÓN DE ALÁN (2026-07-30): contacto.html es el fichero DEFINITIVO de esta página — no se
+  crean más versiones con sufijo AAMMDD_HHMM; cualquier cambio futuro se edita en este mismo
+  fichero. Sustituye a contacto_260729_1058.html / contacto_260730_1025.html, que quedan como
+  historial.
+
+  IMPORTANTE — backend del formulario, sigue pendiente, léase antes de dar esto por "funcional":
+  Los campos, sus atributos "name" y las clases del formulario son IDÉNTICOS a los de
+  portal-dkagora.html#contacto a propósito, para poder reutilizar sin tocar una sola línea:
+    - assets/contact-form.js (validación en cliente + POST a /api/contacto)
+    - functions/api/contacto.js (Cloudflare Pages Function ya en funcionamiento para dkagora.ai)
+  Falta que Vint decida y confirme la topología de despliegue antes de que el envío llegue a alguna
+  parte (mismo proyecto de Cloudflare Pages que dkagora.ai, o proyecto aparte). Esto no lo decido
+  yo: es infraestructura/despliegue, mandato de Vint.
+
+  Cloudflare Turnstile: se reutiliza la misma Site Key pública que dkagora.ai
+  (0x4AAAAAAD_zCqG7x2_En59R). Falta añadir dktec.es a los dominios autorizados en el panel de
+  Cloudflare, o crear un widget/Site Key propio — lo decide quien administre el panel (Vint).
+
+  Legal: aviso de privacidad enlaza a dktec-privacidad.html (borrador, pendiente de validación
+  final de Erin).
+
+  ACTUALIZACIÓN 260730 (a petición de Alán): se probó dejar esta página totalmente blanca (sin el
+  fondo de circuito), pero se revirtió — el fondo verde vuelve a ser el mismo .bg-fixed compartido
+  con el resto del sitio. El formulario sigue en un panel claro para legibilidad. Se mantiene quitado
+  el botón "Hablemos" del header, porque en esta página ya hay un CTA de contacto propio (el
+  formulario / botón "Enviar mensaje"); el resto de páginas conservan el botón.
+
+  ACTUALIZACIÓN 260826 (a petición de Alán: "elimina el texto de opcional en el formulario de
+  contacto"): se quita "(opcional)" de la etiqueta de "Teléfono". El campo en sí sigue sin "required"
+  (sigue siendo opcional a efectos del formulario), solo se quita el texto visible.
+
+  ACTUALIZACIÓN 260826 (2ª, a petición de Alán: "la pagina de contacto sigue siendo la antigua, haz
+  una version para la nueva pagina de dktec"): esta página se quedó con el diseño previo a la
+  modernización de tanda 2 mientras portal-dktec.html, tecnologias.html, servicios-ia.html y
+  gobierno-it.html ya la llevaban. Cambios para alinearla:
+  - Se añade assets/styles-dktec-v2.css (ya cargada por el resto de páginas vivas del sitio).
+  - Nav de cabecera actualizado: faltaban "Servicios IA" y "Gobierno de IT", y el enlace de
+    "Tecnologías" apuntaba todavía a portal-dktec.html#por-que-fiarte (ancla antigua de cuando
+    tecnologias.html no existía como página propia). Ahora enlaza a tecnologias.html, igual que en
+    el resto de páginas.
+  - El bloque "Contacto / Hablemos" se separa del panel del formulario y pasa a ".transparent-block
+    page-hero": texto claro directamente sobre el verde fijo de la página, igual que el bloque
+    superior del resto de páginas modernizadas (antes era un panel blanco fusionado con el
+    formulario, patrón de 260730 — ver nota de esa fecha, que se conserva como historial). El panel
+    del formulario queda como segundo bloque, opaco (".form-panel" sigue en blanco): resultado
+    transparente → opaco, misma alternancia que el resto del sitio.
+
+  ACTUALIZACIÓN 260828 (a petición de Alán, texto suyo literal): el párrafo bajo "Hablemos" cambia
+  de "Cuéntanos qué es lo que más tiempo te quita hoy y te preparamos una propuesta a medida. Te
+  contactamos en 24-48 h." a "Contacta con nosotros y te responderemos en 24-48 h."
+
+  ACTUALIZACIÓN 260828 (2ª, a petición de Alán, texto suyo literal): la etiqueta del textarea cambia
+  de "¿Qué es lo que más tiempo os quita hoy?" a "Escríbenos un mensaje". El "name" del campo
+  ("dolor") no se toca — sigue igual que en portal-dkagora.html para no romper la reutilización de
+  assets/contact-form.js / functions/api/contacto.js (ver nota de cabecera).
+-->
+</head>
+<body>
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html">Servicios IA</a>
+    <a href="gobierno-it.html">Gobierno de IT</a>
+    <a href="tecnologias.html">Tecnologías</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html" aria-current="page">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="transparent-block page-hero">
+    <span class="eyebrow">Contacto</span>
+    <h1>Hablemos</h1>
+    <p>Contacta con nosotros y te responderemos en 24-48&nbsp;h.</p>
+  </section>
+
+  <section class="section-narrow form-panel">
+    <form class="contact-form" novalidate>
+      <!-- Honeypot antispam: campo señuelo invisible, igual que en portal-dkagora.html -->
+      <input type="text" name="empresa_web" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="ts_carga" class="ts-field">
+      <div class="form-row">
+        <label>Nombre
+          <input type="text" name="nombre" autocomplete="name" required>
+        </label>
+        <label>Empresa
+          <input type="text" name="empresa" autocomplete="organization" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Teléfono
+          <input type="tel" name="telefono" autocomplete="tel">
+        </label>
+      </div>
+      <label>Nº de empleados
+        <select name="empleados" required>
+          <option value="" disabled selected>Selecciona un rango</option>
+          <option value="1-10">1-10</option>
+          <option value="11-50">11-50</option>
+          <option value="51-200">51-200</option>
+          <option value="200+">Más de 200</option>
+        </select>
+      </label>
+      <label>Escríbenos un mensaje
+        <textarea name="dolor" rows="3" required></textarea>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" name="privacidad" required>
+        <span>He leído y acepto la <a href="dktec-privacidad.html">política de privacidad</a>.</span>
+      </label>
+      <!-- Cloudflare Turnstile — Site Key pública, ver nota de cabecera sobre dominios autorizados -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAD_zCqG7x2_En59R"></div>
+      <p class="form-error" role="alert">Completa todos los campos.</p>
+      <p class="form-success" role="status">Mensaje enviado. Te contactamos en 24-48&nbsp;h.</p>
+      <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+      <p class="form-note">Sin precios en ningún caso: cada empresa es distinta, te preparamos una propuesta a medida.</p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-privacidad.html">Privacidad</a> · <a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+<script src="assets/contact-form.js"></script>
+
+</body>
+</html>

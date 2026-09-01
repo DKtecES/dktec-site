@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiénes somos — DKtec (v2, en revisión)</title>
+<meta name="description" content="DKtec: el laboratorio de confianza detrás de dkagora.ai. Quiénes somos y cómo trabajamos.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<style>
+  /* Mismos estilos locales que quienes-somos.html — sin cambios de tamaño/layout, solo copy
+     corregido según GEN-72 tanda 2 §3/§4. */
+  .qs-placeholder{
+    border:2px dashed var(--gris-claro); border-radius:1rem; background:#F2F2F2;
+    min-height:100px; display:flex; align-items:center; justify-content:center;
+    font-size:0.8rem; color:var(--gris-medio); text-align:center; padding:0.75rem;
+  }
+  .qs-panel h2{ font-size:2rem; }
+  .qs-panel h3{ font-size:1.15rem; }
+  .qs-panel p{ line-height:1.6; }
+</style>
+<!--
+  GEN-72 (Portal de DKtec, web dktec.es) · quienes-somos-v2.html — vista previa de la tanda 2
+  Ejecuta: Linus · Dirige/supervisa: Alán
+  Requisitos: 20 WORKSPACE/Proyectos/GENESIS/GEN-72-requisitos-adicionales-tanda2-partners-y-paginas-de-linea_260806_1534.md
+              (v2.3) §3, §3.1, §4 — tarea 13. Amplía GEN-72-requisitos-portal-dktec_260723_1645.md (v1.0).
+  Encargo: Alán, chat directo con Linus, 2026-08-24 ("crea versiones para la v2").
+
+  POR QUÉ ESTE FICHERO Y NO SE EDITA quienes-somos.html: sigue el mismo patrón de vista previa ya
+  usado en portal-dktec-v2.html / servicios-ia.html / gobierno-it.html — un fichero "-v2" en
+  paralelo al sitio en vivo, que no toca ni sustituye a la página publicada. Por eso NO aplica aquí
+  la norma de versionado "-old_260806" del doc §2 (esa norma es para cuando se edita el fichero
+  vivo in situ; este es un fichero nuevo). quienes-somos.html sigue siendo el fichero en producción,
+  sin cambios.
+
+  QUÉ CAMBIA respecto a quienes-somos.html:
+  1. Párrafo de apertura — el doc §0/§3 señala que "En Dktec llevamos mucho tiempo haciendo que la
+     tecnología trabaje..." es la afirmación de antigüedad más desmontable del sitio (DKtec tiene un
+     año; los tres contratos de partner son de junio-julio de 2025). Se sustituye por el argumento
+     del laboratorio (§3.1, borrador de Cassie/Linda para Jimmy, integrado aquí literal).
+  2. Apartado "A quién ayudamos" — el criterio de segmento cambia de "ISVs y SSVs medianos
+     consolidados..." a "empresa mediana española, del tipo que sea, donde decide el CEO o el
+     propietario" (§4, decisión D-10 de Jose). El ISV no desaparece del sitio: mantiene su puerta
+     propia en /tecnologias (§4, contrapartida obligatoria) — ver tecnologias-v2.html.
+  3. Nav actualizada al orden sitewide de la tanda 2 (§6): dkagora · Servicios IA · Gobierno de IT ·
+     Tecnologías · Quiénes somos · Contacto — enlazando a los ficheros -v2 correspondientes.
+     "Contacto" sigue apuntando a contacto.html (el doc marca esa página "[sin cambios]" en §6, así
+     que no se duplica).
+
+  QUÉ NO CAMBIA: "Cómo trabajamos", "Qué nos hace diferentes" y "Practicamos lo que vendemos" no
+  contienen afirmaciones de antigüedad ni el criterio de segmento antiguo — se dejan tal cual.
+  El doc (§3.1, T21) también pide subir el dogfooding a sección propia de la home; eso es tarea de
+  home (T21), fuera del alcance de este fichero, y no se toca aquí.
+
+  Copy de los apartados 1 y 2: borrador literal de Cassie/Linda (doc §3.1 y §4), pendiente del
+  pulido final de Jimmy (T13) — no se reescribe aquí, se integra tal cual pide el documento.
+
+  noindex a propósito: vista previa sin cierre de copy ni revisión de Melissa/Erin.
+-->
+</head>
+<body>
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html">Servicios IA</a>
+    <a href="gobierno-it.html">Gobierno de IT</a>
+    <a href="tecnologias.html">Tecnologías</a>
+    <a href="quienes-somos.html" aria-current="page">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="section-narrow qs-panel" style="max-width:1100px;margin:2rem auto;background:var(--blanco);text-align:left;">
+      <h2>Quiénes somos</h2>
+      <p>DKtec es una empresa joven con gente que no lo es. Detrás hay décadas de oficio en los sistemas que sostienen a las empresas medianas españolas — y una decisión: en vez de contarte lo que la IA puede hacer por ti, la hemos aplicado primero a nuestra propia casa. Nuestro aval no es un catálogo de clientes de veinte años. Es que esta empresa ya funciona como queremos que funcione la tuya.</p>
+
+      <h3>A quién ayudamos</h3>
+      <p>Trabajamos con empresas medianas españolas donde la tecnología no es un departamento: es lo que sostiene el negocio. No importa el sector — importa que haya un sistema del que dependen las ventas, la producción o el servicio, y que la decisión de tocarlo la tome el propietario o el CEO, no un comité. Ahí es donde entramos, y entramos con cuidado: nadie nos contrata para arriesgar lo que ya funciona.</p>
+
+      <h3>Cómo trabajamos</h3>
+      <p>No lo hacemos todo dentro de casa, y no pretendemos lo contrario: funcionamos como una empresa virtual, coordinando partners especializados para darte el 80% del valor al 20% del coste, sin que tengas que gestionar tú esa complejidad — la gobernamos nosotros. Dos líneas concretas sostienen ese trabajo: la transformación hacia equipos de IA propios (el terreno de dkagora.ai) y el buen gobierno de IT — gestión de vulnerabilidades, riesgo tecnológico y planes de continuidad de negocio, para cuando la prioridad es no parar.</p>
+
+      <h3>Qué nos hace diferentes</h3>
+      <p>No somos solo un proveedor técnico. Entendemos la tecnología como una inversión con retorno, no como un gasto, y hablamos directamente contigo, el CEO o propietario, no solo con tu departamento de IT. La IA no es un adorno de cara al cliente: la aplicamos primero puertas adentro, en nuestro propio funcionamiento diario, antes de ofrecerla a nadie más.</p>
+
+      <h3>Practicamos lo que vendemos</h3>
+      <p>Usamos dkagora.ai en nuestro propio día a día antes de llevarlo a nuestros clientes — dogfooding, no una promesa de folleto. Si no confiáramos en ello para gobernar nuestra propia operación, no te pediríamos que confiaras tú.</p>
+
+      <p style="clear:both;margin-top:2rem;"><a href="portal-dktec.html" class="btn-ghost btn" style="font-size:0.9rem;padding:0.4rem 0.9rem;">← Volver a Inicio</a></p>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-privacidad.html">Privacidad</a> · <a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+
+</body>
+</html>

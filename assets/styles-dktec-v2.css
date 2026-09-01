@@ -1,0 +1,136 @@
+/*
+  GEN-72 (Portal de DKtec, web dktec.es) — tanda 2 (partners, páginas de línea, corrección de
+  posicionamiento). Estilos ADITIVOS para portal-dktec-v2.html, servicios-ia.html y
+  gobierno-it.html.
+
+  Por qué un fichero aparte: estas tres páginas son la vista previa de la tanda 2, en paralelo al
+  sitio en vivo (portal-dktec.html, quienes-somos.html, tecnologias.html, contacto.html, legales).
+  Este fichero NO toca assets/styles-dktec.css — evita cualquier efecto visual sobre las páginas
+  publicadas. Se carga DESPUÉS de styles-dktec.css y reutiliza sus variables de marca
+  (--verde-principal, --verde-brillante, --gris-*, --font-heading, --font-body): no las redefine.
+
+  Ejecuta: Linus · Dirige/supervisa: Alán · Fecha: 2026-08-06
+  Fuente: 20 WORKSPACE/Proyectos/GENESIS/GEN-72-requisitos-adicionales-tanda2-partners-y-paginas-de-linea_260806_1534.md
+*/
+
+/* Bloque "Nuestras dos líneas" (doc §7.2) */
+.lines-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:2rem; text-align:left; }
+@media (max-width:800px){ .lines-grid{ grid-template-columns:1fr; } }
+.line-card{ display:flex; flex-direction:column; }
+.line-card h3{ font-size:1.3rem; }
+.line-card p{ flex:1 1 auto; }
+.line-card .btn{ align-self:flex-start; margin-top:0.75rem; }
+
+/* Banda de partners (doc §5) — dos categorías etiquetadas, cada una con sus logos, nunca
+   mezclados entre sí. 260807 (a petición de Alán): en vez de apiladas cada una en su propia fila,
+   pasan a una sola fila de 2 columnas — deshecho el intento anterior de destacar "Partners de
+   ejecución" con reordenación + color (columnas de igual peso visual en su lugar). En móvil
+   (<800px) vuelven a apilarse en una columna, como antes.
+   260825 (a petición de Alán: "haz que los partners de tecnologías y partners de ejecución esten
+   en dos filas, una debajo de la otra"): se deshace el cambio anterior — vuelve a una sola columna
+   (cada categoría en su propia fila) en todos los tamaños de pantalla, no solo en móvil. */
+.partners-band{ margin-top:1.5rem; display:grid; grid-template-columns:1fr; gap:1.75rem; align-items:start; }
+.partners-category-label{
+  display:block; font-family:var(--font-heading); font-size:0.8rem; font-weight:700;
+  letter-spacing:0.06em; text-transform:uppercase; color:var(--gris-medio); margin-bottom:0.75rem;
+}
+.partners-logos-row{ display:flex; flex-wrap:wrap; gap:1.25rem; align-items:center; }
+/* Tarjeta de tamaño fijo (260807, a petición de Alán: "no aumentes el tamaño de la tarjeta, solo
+   el de la imagen interior"). Antes min-width dejaba que la tarjeta creciera con el contenido —
+   al recortar el logo de Servoy (más ancho a igual altura) su tarjeta quedaba más ancha que las
+   demás. Con flex:0 0 185px las 5 tarjetas miden siempre lo mismo (185px de ancho, el que ya
+   necesitaba Agile Corporation, el logo más ancho a 34px de alto).
+   260807 (2ª vuelta, mismo motivo): min-height tenía el mismo problema en vertical — al subir
+   Veryant a 50px de alto, su tarjeta creció a ~79px mientras las demás seguían en 64px. Se pasa a
+   height fija (64px, la medida que ya tenían las demás) y el padding vertical baja de 0.9rem a 7px
+   —lo justo para que 50px de imagen + 7px arriba + 7px abajo quepan exactos en 64px, sin recortar
+   nada—; en las tarjetas con imagen de 34px esto no cambia nada visualmente, porque el hueco
+   sobrante ya lo repartía el centrado (align-items:center), no el padding. */
+.partner-logo-item{
+  display:flex; align-items:center; justify-content:center;
+  background:var(--blanco); border:1px solid var(--gris-claro); border-radius:0.75rem;
+  padding:4px 1.4rem; height:84px; flex:0 0 230px;
+}
+/* Tamaño igualado al de Rocket Software (260806, a petición de Alán): antes cada logo se
+   escalaba a lo que cupiera dentro de max-height/max-width, así que el más "ancho" (Agile
+   Corporation, ratio ~4:1) quedaba más bajo que el resto. Con height fija (la altura a la que ya
+   renderizaba el logo de Rocket) y solo el ancho en automático, los 5 logos quedan a la misma
+   altura visual — max-width de margen de seguridad, por si algún logo diera un ancho mayor a esa
+   altura.
+   260807 (3ª vuelta, a petición de Alán: "aumenta el tamaño de la imagen del logo de veryant" —
+   tras confirmar que quería agrandar las 5 tarjetas juntas, no solo la de Veryant): la altura base
+   sube de 34px a 44px y la tarjeta de 185×64 a 225×84 (mismo criterio de holgura que antes,
+   escalado ~1.3×) para que Veryant tenga más margen dentro de su tarjeta y se acerque más a
+   Servoy/Rocket en términos absolutos, aunque su proporción más cuadrada seguirá sin igualarlos
+   del todo (ver nota junto a la regla de Veryant, más abajo). */
+.partner-logo-item img{ height:44px; width:auto; max-width:200px; display:block; }
+/* Veryant más grande (260807): con la tarjeta ahora en 84px de alto, el máximo que cabe con 4px de
+   margen arriba/abajo es 76px — su ancho a esa altura (~118px) ya se acerca mucho más a Rocket
+   (~150px a 44px de alto) que antes (90px frente a 116px, con la tarjeta pequeña). No puede
+   igualarlos del todo porque su canvas (~183×118) es más cuadrado que el de Servoy o Rocket —
+   solo recortando el propio diseño de Veryant (quitando parte del patrón de puntos) se llegaría a
+   una proporción tan ancha como la de ellos. */
+.partner-logo-item img[src*="veryant"]{ height:76px; }
+/* Albor Services más grande (260807, a petición de Alán): mismo caso que Veryant — su canvas
+   (4364×1921, ratio ~2.27) es más cuadrado que el de Servoy o Rocket, así que a 44px de alto
+   (~100px de ancho) se veía más pequeño. Se sube al mismo tope que Veryant (76px, el máximo que
+   cabe en la tarjeta fija de 84px con 4px de margen arriba/abajo), dando ~173px de ancho.
+   260825 (a petición de Alán: "reduce ligeramente el tamaño de la imagen de dentro de la tarjeta"):
+   se baja de 76px a 64px — sigue por encima del tamaño base (44px) pero ya no toca el tope de la
+   tarjeta. */
+.partner-logo-item img[src*="albor-services"]{ height:64px; }
+/* Logo de Servoy (260807, a petición de Alán): el fichero original (assets/logo-servoy.png,
+   conservado sin tocar como assets/logo-servoy-original-260807.png) tenía un margen transparente
+   enorme alrededor del texto — a 34px de alto de canvas, el "servoy" visible ocupaba solo ~27% de
+   esa altura, mucho más pequeño que Rocket Software (cuyo PNG sí está recortado a su contenido).
+   Subir antes la altura del <img> a 50px no arreglaba el problema de fondo, solo agrandaba el
+   hueco vacío. Se sustituye por assets/logo-servoy-v2.png, recortado al contenido real del logo
+   (igual que ya está Rocket), y con eso basta la misma altura uniforme de 34px para que ambos se
+   vean del mismo tamaño. */
+.partner-logo-badge{
+  font-family:var(--font-heading); font-weight:700; font-size:0.95rem;
+  color:var(--gris-oscuro); text-align:center; line-height:1.25;
+}
+.partner-logo-badge .badge-pending{
+  display:block; font-family:var(--font-body); font-weight:400; font-size:0.68rem;
+  color:var(--gris-medio); margin-top:0.2rem; text-transform:none; letter-spacing:0;
+}
+
+/* Nota de borrador (doc completo, copy pendiente de pulido de Jimmy) — mismo patrón visual que
+   .content-note / .copy-pendiente de styles-dktec.css y tecnologias.html, reutilizado aquí. */
+.draft-badge{
+  display:inline-block; font-size:0.75rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.5px; padding:0.3rem 0.7rem; border-radius:999px;
+  background:rgba(255,180,0,0.18); color:#8a5b00; margin-bottom:1rem;
+}
+
+/* Capas del camino — Servicios IA (doc §9.2 punto 3) */
+.steps-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:1.75rem; text-align:left; }
+@media (max-width:800px){ .steps-grid{ grid-template-columns:1fr; } }
+.steps-grid .card .num{ margin-bottom:0.6rem; }
+
+/* Trío de avales / bloques "Lo que hacemos" (Gobierno de IT) — reutilizan .grid-3 / .card de
+   styles-dktec.css sin cambios, así que no necesitan clase propia aquí. */
+
+/* Ancho de bloques igualado (260807, a petición de Alán): en servicios-ia.html y gobierno-it.html
+   el título superior (.page-hero, max-width:760px en styles-dktec.css) quedaba más estrecho que
+   el resto de bloques de la página (.section-wide, 1100px), igual que en la home. Se sube aquí
+   a 1100px SOLO para estas páginas de borrador (este fichero no se carga en las páginas live que
+   también usan .page-hero — tecnologías, contacto, quiénes somos — así que no las afecta). */
+.page-hero{ max-width:1100px; }
+
+/* Bloques "Tecnología que sostiene negocios" y "Practicamos lo que vendemos" — mismo estilo
+   "transparente" que el bloque #dkagora / #cyber-it de styles-dktec.css (260807, a petición de
+   Alán: que estos dos bloques tengan el mismo estilo de diseño que el bloque de dktec): sin panel
+   propio (fondo, blur y sombra a cero), se ve directamente el fondo verde fijo de toda la página
+   (.bg-fixed) por debajo, con eyebrow/título/párrafo en claro — igual que #dkagora. Las tarjetas
+   internas (.card, en "Practicamos lo que vendemos") no cambian: ya son legibles sobre el verde,
+   igual que .advantage-mini en #dkagora. */
+#tecnologia-partners.section-wide, #dogfooding.section-wide{
+  background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+  box-shadow:none; padding:0; margin:1rem auto;
+}
+#tecnologia-partners > .eyebrow, #dogfooding > .eyebrow{ color:var(--verde-brillante); }
+#tecnologia-partners > h2, #dogfooding > h2{ color:var(--blanco); }
+#tecnologia-partners > p, #dogfooding > p{ color:rgba(255,255,255,0.92); }
+#tecnologia-partners .btn-primary{ background:var(--verde-brillante); color:var(--negro); box-shadow:none; }

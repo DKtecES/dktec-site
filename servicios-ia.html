@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servicios IA — DKtec</title>
+<meta name="description" content="El camino para que tu empresa aproveche la IA de verdad: cultural, organizativo y técnico, en ese orden.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<style>
+  /* "Segundo modo" (260824, a petición de Alán — mismos arreglos ya aplicados en tecnologias.html y
+     gobierno-it.html): mismo tratamiento "transparente" que #tecnologia-partners/#dogfooding de
+     assets/styles-dktec-v2.css (bloque "dkagora" de la home) — sin panel propio, texto claro
+     directamente sobre el verde fijo de la página. Alterna con el modo normal (panel claro, como
+     estaba toda la página hasta ahora), empezando por el 2º modo en el bloque superior (".page-hero").
+     Las tarjetas (.card) no cambian: siguen blancas y legibles sobre el verde. */
+  .transparent-block.section-wide, .transparent-block.page-hero{
+    background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+    box-shadow:none; padding:0; margin:1rem auto;
+  }
+  .transparent-block > .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block > h1, .transparent-block > h2, .transparent-block > h3{ color:var(--blanco); }
+  .transparent-block > p{ color:rgba(255,255,255,0.92); }
+  /* El párrafo de la sección 2 lleva un enlace en línea ("red de partners que ejecuta"); sin esta
+     regla heredaría el color de enlace por defecto, que puede no leerse bien sobre el verde fijo. */
+  .transparent-block > p a{ color:var(--blanco); text-decoration:underline; }
+  /* 260824: el título/párrafos del bloque "Nosotros no te asesoramos..." pasaron a vivir dentro de
+     ".text-with-placeholder-text" (para ir junto al placeholder) — ya no son hijos DIRECTOS de
+     ".transparent-block", así que las reglas ">" de arriba dejaban de aplicarles el color blanco.
+     Se añade aquí el mismo recoloreo para ese caso anidado. */
+  .transparent-block .text-with-placeholder-text .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block .text-with-placeholder-text h1,
+  .transparent-block .text-with-placeholder-text h2,
+  .transparent-block .text-with-placeholder-text h3{ color:var(--blanco); }
+  .transparent-block .text-with-placeholder-text p{ color:rgba(255,255,255,0.97); line-height:1.65; }
+  .transparent-block .text-with-placeholder-text p a{ color:var(--blanco); text-decoration:underline; }
+
+  /* Placeholder de imagen (260824, a petición de Alán): caja gris de sustitución, a rellenar más
+     adelante con foto/ilustración real. Mismo criterio visual que ".qs-placeholder" de
+     quienes-somos.html.
+     260824 (2ª, a petición de Alán: "en vez de hacerlos tan anchos y estrechos, mueve textos para
+     que encajen de forma mas natural"): antes ocupaba todo el ancho de la sección con muy poca
+     altura (franja aplanada). Pasa a proporción 16:9 tipo foto, con un ancho máximo y centrado, para
+     que se vea como un hueco de imagen real y no como una franja de texto. */
+  .img-placeholder{
+    border:2px dashed var(--gris-claro); border-radius:1rem; background:#F2F2F2;
+    aspect-ratio:16/9;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem; color:var(--gris-medio); text-align:center; padding:1rem;
+  }
+  /* 260824 (a petición de Alán: "pon las imagenes a la derecha del bloque de texto"): el texto y el
+     placeholder pasan a ir uno junto al otro en vez de apilados. Contenedor local propio (no
+     reutiliza ".section-split" del home para no depender de su comportamiento en breakpoints que no
+     he podido revisar aquí) — en pantallas estrechas el placeholder baja debajo del texto. */
+  .text-with-placeholder{ display:flex; align-items:flex-start; gap:2rem; flex-wrap:wrap; margin-top:1rem; }
+  .text-with-placeholder > .text-with-placeholder-text{ flex:1 1 320px; }
+  .text-with-placeholder > .text-with-placeholder-text h2{ font-size:1.5rem; }
+  .text-with-placeholder > .img-placeholder{ flex:1 1 260px; max-width:340px; margin:0; aspect-ratio:unset; }
+  @media (max-width:700px){ .text-with-placeholder > .img-placeholder{ flex-basis:100%; max-width:none; } }
+  /* 260828 (a petición de Alán: "añade esta foto de anne aqui"): variante con foto real en vez de
+     placeholder — mismo patrón ya usado en tecnologias.html (".img-placeholder-photo"), mismo
+     tratamiento visual que ".img-placeholder" pero sin el marco discontinuo/fondo gris.
+     260828 (2ª, a petición de Alán: "haz la foto mas pequeña"): flex-basis/max-width bajan de
+     260px/340px a 180px/230px.
+     260828 (3ª, a petición de Alán: "mas pequeña aun"): bajan otra vez, de 180px/230px a
+     130px/170px.
+     260828 (4ª, a petición de Alán: "reduce el tamaño del bloque para quitar los huecos en
+     blanco"): con la foto ya estrecha (170px), su alto por proporción (~227px, más alto que el
+     texto de 4 líneas) hacía que ".text-with-placeholder" (align-items:stretch) estirara la columna
+     de texto para igualar esa altura, dejando hueco en blanco debajo del párrafo. Pasa a
+     align-items:flex-start: cada columna ocupa solo su alto natural, sin estirarse a la del otro —
+     el panel ".section-wide" que envuelve el bloque pasa a ajustarse al contenido real. */
+  .text-with-placeholder > .img-placeholder-photo{
+    flex:1 1 130px; max-width:170px; width:100%; height:100%;
+    object-fit:cover; border-radius:1rem; box-shadow:0 12px 32px rgba(0,0,0,0.18); display:block;
+  }
+  @media (max-width:700px){ .text-with-placeholder > .img-placeholder-photo{ flex-basis:100%; max-width:none; } }
+  /* 260828 (5ª, a petición de Alán: "haz que haya menos cosa blanca por encima y por debajo de la
+     foto"): con la foto ya estrecha, su alto (~227px) queda corto frente al padding vertical
+     estándar del panel (2.5rem = 40px arriba y abajo, heredado de ".section-wide"), dejando mucho
+     blanco visible por encima/debajo de la foto. Solo para este panel (".problema-panel", añadida
+     solo a esta sección): padding vertical baja de 2.5rem a 1.25rem. Padding horizontal y el resto
+     de usos de ".section-wide" en la página no cambian. */
+  .problema-panel{ padding-top:1.25rem; padding-bottom:1.25rem; }
+
+  /* 260825 (4ª, a petición de Alán: "hazla un poco mas grande, que rellene el hueco hacia arriba
+     abajo y derecha"): la imagen se veía pequeña dentro de mucho verde/blanco vacío alrededor por dos
+     motivos — (1) ".hero-secundario" trae su propio padding (2.75rem/2rem) ADEMÁS del que ya pone el
+     panel ".section-wide" que lo envuelve aquí (a diferencia del #dkagora de la home, que anula el
+     panel de .section-wide y no tiene ese doble padding); (2) la columna de imagen solo ocupaba el
+     45% del ancho. Se quita el padding duplicado y se ensancha la columna de imagen (45% → 60%,
+     quitándoselo a la columna de texto) para que la imagen crezca hacia arriba, abajo y a la derecha
+     sin tocar el hueco de texto de la izquierda. */
+  .dkagora-mini.hero-secundario{ padding:0; }
+  /* 260826 (a petición de Alán: "ajusta las posiciones del texto e imagen para que no tenga tanto
+     espacio libre"): con el copy nuevo (párrafos + lista de 5 puntos), la columna de texto pasó a ser
+     mucho más alta que la imagen (foto horizontal, proporción fija) — como ".hero-secundario-media"
+     se estira a la misma altura que el texto (align-self:stretch) pero la imagen dentro solo ocupa su
+     alto natural, quedaba mucho hueco vacío debajo de la imagen. Dos ajustes: (1) la columna de texto
+     pasa de 40% a 50% — al ganar ancho, el texto necesita menos líneas y su columna baja de altura,
+     así que TODO el bloque (imagen incluida) se estira menos; (2) la imagen se centra verticalmente
+     dentro de su columna (antes quedaba pegada arriba, con todo el hueco sobrante abajo) para que el
+     espacio que aún sobra quede repartido arriba y abajo en vez de amontonado en un solo lado. */
+  .dkagora-mini .hero-secundario-text{ flex-basis:42%; }
+  .dkagora-mini .hero-secundario-media{ flex-basis:58%; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; }
+  /* ".hero-secundario p" (assets/styles-dktec.css) trae "margin:0 auto 1rem" — los márgenes
+     laterales "auto" centran la frase dentro de la columna (como flex item, en el eje transversal),
+     pisando el "align-items:flex-start" del contenedor. Se anulan para que quede pegada a la
+     izquierda, igual que la imagen y el botón. */
+  .dkagora-mini .hero-secundario-media .dkagora-tagline{ margin-top:1.25rem; margin-left:0; margin-right:0; max-width:none; }
+  /* 260826 (11ª, a petición de Alán: "sube la imagen de posicion y hazla un poco mas grande"): la
+     imagen pasa de centrada (align-items:center) a anclada arriba (flex-start) — sube de posición.
+     Y crece: la columna de imagen pasa de 52% a 58% (la de texto baja de 48% a 42% en consecuencia)
+     — como el <img> sigue a width:100% de su columna con height:auto, ganar ancho de columna hace
+     que la imagen crezca proporcionalmente (mantiene su proporción, no se recorta).
+     260826 (12ª, a petición de Alán: "ponla un poco mas abajo la imagen"): sin dejar el anclaje
+     arriba (align-items:flex-start), se añade un margin-top a la imagen para bajarla un poco desde
+     el borde superior de su columna, sin volver a centrarla del todo.
+     260826 (13ª, a petición de Alán: "sube la imagen de posicion y mueve el texto de 'Tu equipo de
+     IA. En tu casa. A tu nombre.' y el boton a debajo de la iamgen"): la frase de cierre
+     (".dkagora-tagline") y el botón "Descubrir más" se trasladan (en el HTML) de la columna de texto
+     a la columna de imagen, justo debajo del <img> — ya no están bajo la lista de 5 puntos. Para que
+     encajen uno debajo de otro, ".hero-secundario-media" pasa de fila centrada (para centrar solo la
+     imagen) a columna (flex-direction:column) con todo alineado a la izquierda y empezando arriba
+     (justify-content:flex-start) — esto también sube la imagen (ya no lleva el margin-top de la
+     actualización 12ª, que ahora no aplica: la imagen es el primer elemento de la columna). */
+  /* 260826 (3ª, a petición de Alán: "extiende el texto"): la columna de texto pasa de 50% a 60% —
+     líneas más largas, menos hueco en blanco a la derecha del texto en pantallas anchas. La columna
+     de imagen baja de 50% a 40% en consecuencia (mismo ancho total del bloque).
+     260826 (5ª, a petición de Alán: "reduce el espacio que ocupa el texto por la derecha y sube la
+     imagen" — referido a la fila lista+imagen, ya sin el gancho/párrafo iniciales desde el cambio
+     anterior): con la lista de 5 puntos sola (más corta que el bloque de texto de antes), 60% de
+     ancho para el texto se veía desproporcionado frente a la imagen. La columna de texto baja a 48%
+     y la de imagen sube a 52%, y la imagen pasa de anclada abajo (align-items:flex-end) a anclada
+     arriba (flex-start) — "sube la imagen" — quedando junto al primer punto de la lista en vez de
+     junto al botón. */
+
+  /* 260826 (a petición de Alán, con copy propio dictado por él): texto del hueco de la izquierda del
+     bloque dkagora.ai. La sección que envuelve este bloque es ".section-wide" normal (panel claro),
+     no "#dkagora"/".transparent-block" (que anulan el panel y ponen fondo verde) — por eso los colores
+     por defecto de ".hero-secundario p" (blanco, pensados para ese otro caso) no sirven aquí: se
+     sobrescriben a gris oscuro para que se lean sobre el panel claro. */
+  .dkagora-mini p{ color:var(--gris-oscuro); }
+  .dkagora-mini .dkagora-lead{ font-family:var(--font-heading); font-weight:700; font-size:1.25rem; line-height:1.4; }
+  .dkagora-mini .dkagora-checklist{ list-style:none; margin:0 0 1rem; padding:0; display:flex; flex-direction:column; gap:0.7rem; }
+  .dkagora-mini .dkagora-checklist li{ font-size:1rem; line-height:1.5; padding-left:1.3rem; position:relative; color:var(--gris-oscuro); }
+  .dkagora-mini .dkagora-checklist li::before{ content:"●"; position:absolute; left:0; top:0.55em; color:var(--verde-principal); font-size:0.5rem; }
+  .dkagora-mini .dkagora-tagline{ font-family:var(--font-heading); font-weight:700; font-size:1.1rem; margin-bottom:0; }
+  .dkagora-mini .dkagora-intro p:not(.dkagora-lead){ font-size:1.05rem; }
+  /* 260826 (7ª, a petición de Alán: "reduce un poco el tamaño del texto"): tras las subidas de
+     tamaño de las actualizaciones 260826 (1ª y 2ª), el conjunto se veía algo grande — se recorta un
+     escalón cada elemento: gancho 1.35rem→1.2rem, párrafo del gancho (sin clase propia, hereda el
+     1.1rem global de "p") a 1rem, puntos de la lista 1.05rem→0.95rem, frase de cierre 1.2rem→1.05rem.
+     260826 (8ª, a petición de Alán: "haz el texto un poco mas grande"): probado un paso intermedio
+     (gancho 1.3rem, párrafo 1.05rem, lista 1.05rem, cierre 1.15rem).
+     260826 (9ª, a petición de Alán: "dejalo como estaba antes"): deshecho el paso 8ª — vuelve a los
+     tamaños del paso 7ª.
+     260826 (10ª, a petición de Alán: "hazlo un poco mas grande el texto, ligeramente"): subida más
+     suave que el intento 8ª (que se deshizo por pasarse) — +0.05rem por elemento respecto al paso
+     7ª: gancho 1.2→1.25rem, párrafo 1→1.05rem, lista 0.95→1rem, cierre 1.05→1.1rem. */
+  /* 260826 (6ª, a petición de Alán: "pon la imagen un poco mas al medio y reduce la distancia entre
+     cada bloque de texto"): la imagen pasa de anclada arriba (flex-start) a centrada verticalmente
+     (align-items:center) en su columna — "más al medio". Y se acorta el espacio entre bloques de
+     texto: el hueco entre puntos de la lista baja de 1.1rem a 0.7rem, el margen bajo la lista de
+     1.5rem a 1rem, y el margen bajo cada párrafo del gancho inicial (".dkagora-intro") de 1rem
+     (el margin:0 0 1rem por defecto de "p") a 0.6rem — ver regla de ".dkagora-intro p" más abajo. */
+  .dkagora-mini .dkagora-intro p{ margin-bottom:0.6rem; }
+  .dkagora-mini .dkagora-intro p:last-child{ margin-bottom:0; }
+  /* 260826 (4ª, a petición de Alán, con capturas de las dos primeras frases: "extiende el texto de
+     estas filas unicamente"): esas dos frases (el gancho en negrita y el párrafo de "agentes con
+     nombre propio") salen de la columna de texto (60% de ancho) y pasan a un bloque ".dkagora-intro"
+     a todo el ancho del bloque, ENCIMA de la fila texto+imagen — así se extienden de verdad (todo el
+     ancho del panel) sin tocar el resto (lista de 5 puntos, frase de cierre, botón e imagen, que
+     siguen exactamente igual que antes en su fila de dos columnas). ".hero-secundario" trae
+     text-align:center y sus "p" max-width:640px/margin:0 auto — se anulan aquí para que el texto
+     quede a la izquierda y a todo lo ancho, en vez de centrado y limitado. El color se movió de
+     ".hero-secundario-text p" a ".dkagora-mini p" (más arriba) para que seguir cubriendo estas dos
+     frases ahora que ya no están dentro de ".hero-secundario-text". */
+  .dkagora-mini .dkagora-intro{ text-align:left; margin-bottom:1.25rem; }
+  .dkagora-mini .dkagora-intro p{ max-width:none; margin-left:0; margin-right:0; }
+
+  /* 260826 (2ª, a petición de Alán: "alarga el texto de estas partes, baja la imagen de posicion,
+     aprovecha todo lo que puedas el espacio libre"): la lista de 5 puntos era el elemento más
+     "apretado" del bloque (letra más pequeña que el resto del texto, poco espacio entre líneas) —
+     sube de 0.92rem a 1.05rem, con más interlineado y más separación entre puntos, igual que el
+     gancho inicial y la frase de cierre (que también crecen). Con esto el bloque de texto ocupa más
+     alto de forma natural, sin inventar frases nuevas. La imagen, que estaba centrada verticalmente
+     en su columna, pasa a alinearse abajo (pie de la columna) en vez de en medio — con el texto ya
+     más alto, queda mejor anclada al pie que flotando a media altura. */
+</style>
+<!--
+  GEN-72 (Portal de DKtec, web dktec.es) · servicios-ia.html — página nueva (doc D-7, §9)
+  Ejecuta: Linus · Dirige/supervisa: Alán · Revisa: Melissa (PMO)
+  Requisitos: 20 WORKSPACE/Proyectos/GENESIS/GEN-72-requisitos-adicionales-tanda2-partners-y-paginas-de-linea_260806_1534.md §9
+
+  Público: CEO o propietario de empresa mediana. Registro de negocio, cero jerga.
+  Copy: borrador literal de Cassie/Linda (doc §9.1), pendiente del pulido final de Jimmy (T18).
+
+  D-9 / §9.4 — la cifra "~10 agentes por empleado": va SIEMPRE acompañada de la red de partners y
+  del modelo de empresa virtual (nunca sola). Pendiente de que Jorge confirme la proporción exacta
+  contra el roster (`06 Digital Team/Guardarraíles/GR_*.md`) antes de publicar — P-4 del doc.
+
+  noindex a propósito: página en borrador, sin cierre de copy ni validación legal (T23, Erin).
+
+  ACTUALIZACIÓN 260824 (a petición de Alán, "dale a la página de servicios IA los mismos cambios que
+  gobierno IT y tecnologías"): mismo tratamiento alternante normal/transparente ya aplicado en
+  tecnologias.html y gobierno-it.html — ver esos ficheros para el detalle del razonamiento. Aquí
+  cambian el bloque superior (".page-hero"), la sección 2 ("Nosotros no te asesoramos...") y la
+  sección 4 ("Qué no hacemos"), que pasan a ".transparent-block" (pierden su ".alt-bg" las que la
+  tenían); las secciones 1 ("La IA no falla...") y 3 ("Cómo se hace el camino") se quedan en modo
+  normal tal como estaban. Resultado (en su momento): transparente, normal, transparente, normal,
+  transparente.
+
+  ACTUALIZACIÓN 260824 (2ª, a petición de Alán: "añade entre estos dos bloques otro bloque de texto
+  con esa imagen, ademas modifica el resto de bloques siguientes para que mantenga el orden de
+  bloque opaco y bloque transparente"): se inserta un bloque nuevo entre la sección 2 ("Nosotros no
+  te asesoramos...") y la antigua sección 3 ("Cómo se hace el camino"). Al insertar un bloque de más,
+  las dos secciones siguientes cambian de modo para no romper la alternancia: "Cómo se hace el
+  camino" pasa de normal a ".transparent-block"; "Qué no hacemos" pasa de ".transparent-block" a
+  normal. Resultado (se mantiene tras el ajuste de abajo): transparente (page-hero) · normal ("La IA
+  no falla...") · transparente ("Nosotros no te asesoramos...") · normal (bloque nuevo) · transparente
+  ("Cómo se hace el camino") · normal ("Qué no hacemos"). La sección de CTA final (clase ".hero")
+  sigue sin formar parte de esta alternancia.
+
+  ACTUALIZACIÓN 260825 (a petición de Alán, con capturas: "quita esto, solo añade la segunda imagen
+  dentro del bloque como imagen normal, deja hueco para escribir texto"): el bloque nuevo de arriba
+  llevaba el copy y el grid de ventajas reutilizados literalmente del bloque "dkagora.ai" de
+  portal-dktec.html — Alán pide quitar ese copy (no encajaba aquí, era el argumento de venta de
+  dkagora.ai, no de esta página) y dejar solo la imagen real (misma foto,
+  assets/dktec-equipo-agentes.png — "Equipo de DKtec en la oficina, junto al logo DK", la que se ve
+  en el bloque dkagora.ai de portal-dktec.html) como imagen normal (sin marco de placeholder), con la
+  columna de texto vacía a propósito — hueco reservado para cuando haya copy propio de este bloque.
+  No se ha escrito texto nuevo aquí (Linus no inventa copy, v1.0 §7): pendiente de encargo de Alán.
+
+  ACTUALIZACIÓN 260826 (a petición de Alán, con copy dictado literal por él en el chat): se rellena
+  el hueco de texto con el copy que ha dado — título/gancho, párrafo de agentes con nombre propio,
+  lista de 5 puntos ("Conocen tu casa" / "Se quedan contigo" / "Saben cuándo parar" / "Trabajan, no
+  solo responden" / "Cuestan lo que deben") y frase de cierre. Texto tal cual lo mandó, sin editar.
+  Solo se ha añadido CSS de apoyo (".dkagora-lead", ".dkagora-checklist", ".dkagora-tagline") para
+  darle jerarquía visual y, sobre todo, para pasar el color de texto de blanco (el que trae
+  ".hero-secundario" por defecto, pensado para el fondo verde de "#dkagora"/".transparent-block") a
+  gris oscuro — esta sección es ".section-wide" normal, con panel claro, así que el texto blanco por
+  defecto habría quedado invisible.
+
+  ACTUALIZACIÓN 260826 (a petición de Alán: "quita el placeholder de esta zona de servicios IA"): en
+  la sección 2 ("Nosotros no te asesoramos...") se quita el placeholder de imagen ("equipo de agentes
+  de IA en la operación diaria de DKtec") — no hay foto real que poner ahí todavía (v1.0 §7, Linus no
+  inventa contenido). Al quitarlo, el título y los dos párrafos dejan de necesitar el contenedor
+  ".text-with-placeholder"/".text-with-placeholder-text" (era solo para ir junto al hueco de imagen)
+  y pasan a hijos directos de la sección, a todo el ancho — mismo patrón que el resto de secciones de
+  esta página que no llevan imagen. Colores sin cambios: siguen heredando el blanco de
+  ".transparent-block > h2/p" (reglas ya existentes más arriba en el <style>).
+
+  ACTUALIZACIÓN 260828 (a petición de Alán: "añade esta foto de anne aqui"): la sección 1 ("La IA no
+  falla por la tecnología...") pasa a ".text-with-placeholder" con foto real
+  (assets/dktec-anne-servicios-ia.png) a la derecha del texto — antes era solo texto a todo el ancho,
+  sin hueco de imagen. Mismo patrón ".img-placeholder-photo" ya usado en tecnologias.html; variante
+  añadida al CSS local de este fichero porque aquí solo existía la versión placeholder (gris,
+  discontinua). Es ".section-wide" normal (panel claro), así que no lleva las reglas de color de
+  ".transparent-block" — el texto queda oscuro por defecto, correcto sobre fondo blanco.
+-->
+</head>
+<body>
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html" aria-current="page">Servicios IA</a>
+    <a href="gobierno-it.html">Gobierno de IT</a>
+    <a href="tecnologias.html">Tecnologías</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="transparent-block page-hero">
+    <span class="eyebrow">Servicios IA</span>
+    <h1>El camino para que tu empresa aproveche la IA de verdad</h1>
+  </section>
+
+  <!-- 1. El problema -->
+  <section class="section-wide problema-panel">
+    <div class="text-with-placeholder">
+      <div class="text-with-placeholder-text">
+        <h2>La IA no falla por la tecnología. Falla por la organización.</h2>
+        <p>Casi todas las empresas medianas que prueban la IA acaban en el mismo sitio: unas cuantas personas usando ChatGPT por su cuenta, un piloto que funcionó en una demo y murió a los tres meses, y la sensación de que se está perdiendo el tren sin saber cómo subirse. El problema no es la herramienta. Es que nadie ha cambiado cómo se trabaja, quién decide qué, ni cómo se supervisa lo que hace una máquina.</p>
+      </div>
+      <img class="img-placeholder-photo" src="assets/dktec-anne-servicios-ia.png" alt="Retrato profesional de una responsable de tecnología con el pin de DKtec, brazos cruzados.">
+    </div>
+  </section>
+
+  <!-- 2. La prueba: nosotros mismos, cifra siempre junto a la red de partners (§9.4) -->
+  <section class="transparent-block section-wide">
+    <h2>Nosotros no te asesoramos sobre esto: lo hicimos en nuestra propia casa primero.</h2>
+    <p>DKtec es una empresa IA nativa. No como declaración de intenciones: nuestra operación diaria la ejecuta un equipo de agentes de IA con nombre, rol y responsabilidad — alrededor de <strong>diez agentes por cada empleado</strong>. Estrategia, comercial, desarrollo, PMO, legal, infraestructura: cada función tiene su agente, con sus reglas escritas y su supervisión humana en los puntos donde importa. Lo que te proponemos no es una teoría que hemos leído. Es lo que hacemos para funcionar.</p>
+    <p>Esa proporción solo se sostiene porque no lo hacemos todo dentro de casa: nos apoyamos en una <a href="portal-dktec.html#con-quien-trabajamos">red de partners que ejecuta</a> mientras nosotros gobernamos la entrega — núcleo pequeño, mucho apalancamiento, no "somos cuatro y un portátil".</p>
+  </section>
+
+  <!-- Nuevo bloque intermedio (260824, a petición de Alán: "añade entre estos dos bloques otro
+       bloque de texto con esa imagen", refiriéndose al bloque "dkagora.ai" de portal-dktec.html).
+       260825 (varias idas y vueltas, a petición de Alán, con capturas — resumen de lo que pidió cada
+       vez hasta llegar al resultado final):
+       1) "quita esto, solo añade la segunda imagen dentro del bloque como imagen normal, deja hueco
+          para escribir texto" → se quitó el copy/grid de ventajas de dkagora.ai y se dejó solo una
+          foto (equipo DKtec en sala de reuniones, pizarra kanban), con una columna de texto vacía al
+          lado.
+       2) "pon la foto que te pase dentro del bloque, no modifiques nada, pon la foto directamente" /
+          "usa la foto entera, no quites nada de la foto" / "que se vea el texto incluido" → aquí es
+          donde se entiende el encargo real: "la imagen" que Alán pedía desde el principio era la
+          captura completa que él mismo compartió (foto + el texto de dkagora.ai ya incluido en ella,
+          tal cual se ve en pantalla) — no la foto sola con un hueco a rellenar más adelante. Se
+          sustituye todo lo anterior por esa captura completa, sin recortar ni separar foto/texto:
+          assets/imagen-dkagora-captura.png (guardada tal cual la compartió Alán en el chat).
+       OJO para Alán: la foto de esta captura es la misma que aparece marcada en portal-dktec.html
+       (línea ~55) como "NO reutilizar en la home a propósito — es la imagen de producto (dkagora), el
+       contraste casa/producto es parte del encargo (§3)". Aquí se usa igual, por instrucción directa
+       y repetida de Alán con captura; lo dejo anotado por si ese criterio de contraste también debería
+       aplicar a esta página.
+       3) "ahora haz mas pequeña la imagen y deja hueco vacio para en un futuro añadir texto" → la
+          captura completa (punto 2) ocupaba todo el ancho de la sección. Se reduce de tamaño
+          colocándola en la columna de la derecha (como el resto de bloques con imagen de esta
+          página), dejando la columna de la izquierda vacía como hueco para el texto propio de este
+          bloque que falta por escribir (no inventado aquí, v1.0 §7). Ojo: la imagen sigue siendo la
+          captura completa de Alán (foto + el texto de dkagora.ai ya incluido en ella) — el hueco de
+          la izquierda es ADEMÁS de ese texto, no en su lugar.
+       Al insertar este bloque entre la sección 2 y la 3, las secciones 3 y 4 cambian de modo (ver
+       más abajo) para no romper la alternancia opaco/transparente.
+       260825 (5ª, a petición de Alán: "mete un boton que diga descubrir mas, que redirija a la
+       pagina de dkagora.ai"): se añade el botón dentro del hueco de texto — el resto del hueco
+       (encima del botón) sigue vacío, pendiente del copy que falta por escribir.
+       260828 (a petición de Alán: "escribe al principio de este bloque dkagora.ai"): se añade
+       ".eyebrow" con el texto "dkagora.ai" como primera línea de ".dkagora-intro", antes del gancho
+       ("No te vendemos..."). Misma clase ".eyebrow" que el resto del sitio (mayúsculas, verde) —
+       sin CSS nuevo. -->
+  <section class="section-wide">
+    <div class="hero-secundario dkagora-mini">
+      <div class="dkagora-intro">
+        <span class="eyebrow">dkagora.ai</span>
+        <p class="dkagora-lead">No te vendemos una herramienta de IA. Te montamos tu propio equipo: conoce tu casa, se queda en ella y crece contigo.</p>
+        <p>Agentes con nombre, cara y papel propios. Tu gente los crea rellenando una ficha, sin programar. Y son de la empresa: quien hable con uno, habla con el mismo.</p>
+      </div>
+      <div class="hero-secundario--split">
+        <div class="hero-secundario-text">
+          <ul class="dkagora-checklist">
+            <li><strong>Conocen tu casa.</strong> Memoria y contexto de tu empresa, no internet genérico. Leen el dato real de tus sistemas cuando hace falta el número exacto.</li>
+            <li><strong>Se quedan contigo.</strong> La caña, no el pez: creas y cambias tus agentes sin depender de nadie. Y te llevas todo lo construido cuando quieras.</li>
+            <li><strong>Saben cuándo parar.</strong> Tú escribes las normas y los procedimientos, y se cumplen en cada turno. Nada entra en vigor sin que una persona lo autorice. Todo queda trazado.</li>
+            <li><strong>Trabajan, no solo responden.</strong> Actúan sobre tus sistemas —crear, modificar, enviar— con vista previa y tu visto bueno donde el efecto es irreversible.</li>
+            <li><strong>Cuestan lo que deben.</strong> Modelo barato para lo simple, caro solo donde aporta.</li>
+          </ul>
+        </div>
+        <div class="hero-secundario-media">
+          <img src="assets/imagen-dkagora-captura.png" alt="dkagora.ai — Tu propio equipo de IA. El espacio donde tus empleados y tus agentes trabajan juntos: conocen tu empresa, se quedan en ella y crecen contigo." style="display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 12px 32px rgba(0,0,0,0.25);">
+          <p class="dkagora-tagline">Tu equipo de IA. En tu casa. A tu nombre.</p>
+          <div style="margin-top:1rem;">
+            <a class="btn btn-primary" href="https://dkagora.ai" target="_blank" rel="noopener">Descubrir más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Las tres capas del camino, en orden, explicando por qué el orden importa -->
+  <!-- 260824: pasa a ".transparent-block" (antes normal) para mantener la alternancia
+       opaco/transparente tras insertar el bloque "dkagora.ai" justo encima (ver nota de arriba). -->
+  <section class="transparent-block section-wide">
+    <span class="eyebrow">Cómo se hace el camino</span>
+    <h2>Cultural → organizativo → técnico, en ese orden</h2>
+    <p style="max-width:none;">Que el orden sea este y no al revés no es retórica: sin cultura ni organización, la tecnología es un experimento que no sobrevive al primer tropiezo.</p>
+    <div class="steps-grid">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>Cultural — que tu gente quiera</h3>
+        <p>Ninguna transformación sobrevive a un equipo que la vive como una amenaza. Se empieza por entender qué le quita tiempo hoy a cada persona, y por demostrar que un agente le devuelve horas en vez de quitarle el puesto. Primero confianza, después herramientas.</p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Organizativo — decidir quién hace qué</h3>
+        <p>Aquí está el trabajo de verdad: qué procesos pasan a agentes, qué decisiones siguen siendo humanas siempre, quién supervisa a quién, y qué reglas escritas gobiernan lo que un agente puede y no puede hacer. Sin esto, la IA es un experimento; con esto, es una forma de trabajar.</p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h3>Técnico — montar el equipo</h3>
+        <p>Y entonces, y solo entonces, la tecnología: montar tus agentes sobre <a href="https://dkagora.ai" target="_blank" rel="noopener">dkagora.ai</a>, nuestra propia plataforma. Conocen tu empresa, se quedan en ella y crecen contigo. No te dejamos una herramienta: te dejamos un equipo, y a tu gente sabiendo construir y modificar el suyo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Qué no hacemos -->
+  <!-- 260807 (a petición de Alán): section-narrow → section-wide, para que este bloque tenga el
+       mismo ancho que el resto de la página (antes quedaba más estrecho, como en la home).
+       260824: pierde ".transparent-block" (antes transparente) para mantener la alternancia
+       opaco/transparente tras insertar el bloque "dkagora.ai" más arriba (ver nota de esa sección). -->
+  <section class="section-wide">
+    <span class="eyebrow">Qué no hacemos</span>
+    <p style="max-width:none;">No vendemos horas de formación en prompts. No montamos pilotos que sirven para una presentación y no para trabajar. Y no te dejamos con un agente que solo nosotros sabemos mantener.</p>
+  </section>
+
+  <!-- 5. CTA -->
+  <section class="hero" style="padding:4rem 1.5rem;">
+    <h2 style="color:var(--blanco);">¿Por dónde se empieza?</h2>
+    <p>Por saber dónde estás.</p>
+    <a class="btn btn-primary" href="contacto.html">Hablemos</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-privacidad.html">Privacidad</a> · <a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+
+</body>
+</html>

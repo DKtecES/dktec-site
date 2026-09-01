@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DKtec — el socio de IT que te monta tu propio equipo de IA (v2, en revisión)</title>
+<meta name="description" content="DKtec: el laboratorio y socio de IT de confianza que simplifica, dinamiza y hace resiliente tu tecnología. Conoce dkagora.ai, nuestra propia plataforma de equipos de IA.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<!--
+  GEN-72 (Portal de DKtec, web dktec.es) · portal-dktec-v2.html — vista previa de la tanda 2
+  Ejecuta: Linus · Dirige/supervisa: Alán · Revisa: Melissa (PMO)
+  Encargo: Alán, 2026-08-06, en chat directo con Linus.
+  Requisitos: 20 WORKSPACE/Proyectos/GENESIS/GEN-72-requisitos-adicionales-tanda2-partners-y-paginas-de-linea_260806_1534.md (v2.0)
+  Amplía: GEN-72-requisitos-portal-dktec_260723_1645.md (v1.0)
+
+  QUÉ ES ESTE FICHERO Y POR QUÉ NO ES portal-dktec.html:
+  Es una copia de trabajo, en paralelo al home en vivo (portal-dktec.html), con los cambios de home
+  de la tanda 2 (doc §7) ya montados: bloque nuevo "Nuestras dos líneas" (§7.2), bloque de
+  tecnología distinto al de la página (§7.3), banda de partners (§5) y dogfooding como sección
+  propia (§3.1). El titular del hero (§7.1) NO se ha restituido — ver nota 260806 (6ª) más abajo.
+  NO se ha tocado portal-dktec.html ni se ha creado ningún "-old_260806":
+  al construir en un fichero nuevo, la comparación antes/después que pedía el §2 del documento se
+  hace directamente entre este fichero y el vivo, sin necesidad de la excepción de versionado que
+  requería el OK de Alán. Cuando se apruebe, promoverlo a portal-dktec.html es cambiar solo el
+  nombre de fichero (y los enlaces del nav en las demás páginas), no reescribir nada.
+
+  QUÉ NO INCLUYE ESTA PRIMERA VERSIÓN (deliberado, para no bloquear la vista previa):
+  - Las secciones 2, 3 y 4 (problema del CEO · respuesta DKtec · dkagora héroe) están intactas,
+    copiadas literal de portal-dktec.html — la tanda 2 no las toca.
+  - El nav enlaza a tecnologias.html y a quienes-somos.html, que SIGUEN siendo las versiones
+    actuales sin la ampliación (§8) ni la corrección de edad/segmento (§3-§4) de esta tanda — esas
+    dos tareas (T13, T20 del doc) son ediciones de páginas que ya existen y no se han hecho aquí.
+  - servicios-ia.html y gobierno-it.html (D-7, D-8) sí se han construido — ver esos dos ficheros.
+  - ACTUALIZACIÓN 260806 (a petición de Alán): Albor Services y Agile Corporation ya tienen logo
+    real (assets/logo-albor-services.png y assets/logo-agile-corporation.png, subidos por Alán) —
+    sustituyen al placeholder de texto. Los 5 logos de la banda de partners quedan igualados a la
+    altura de Rocket Software (34px, ver .partner-logo-item img en assets/styles-dktec-v2.css), para
+    que ninguno se vea más grande o más pequeño que los demás.
+  - ACTUALIZACIÓN 260806 (6ª, a petición de Alán): el H1 del hero vuelve al titular que sigue en
+    vivo en portal-dktec.html ("...la simplifica, la dinamiza y la hace resiliente"), en vez del
+    mensaje raíz de GEN-88 que pedía el §7.1 de esta tanda ("...te monta el equipo que ya la
+    domina"). La tarea 15 del doc (restituir el mensaje raíz, con OK de Jose/Alán) queda sin aplicar
+    en esta vista previa — Alán decide si se retoma más adelante.
+
+  COPY: todo el texto de las secciones nuevas es el borrador de Cassie (estrategia) + Linda
+  (comercial) del propio documento de la tanda 2 — literal, sin reescribir. Sigue pendiente el
+  pulido final de Jimmy (tareas T15-T17, T21 del doc) antes de publicar.
+
+  PENDIENTE ANTES DE PUBLICAR (no bloquea esta vista previa):
+    1. OK de Alán para promover este fichero a portal-dktec.html (o mantenerlo como página aparte).
+    2. Copy final de Jimmy sobre estos borradores.
+    3. Logos de Albor Services y Agile Corporation — RESUELTO 260806, ver nota más arriba.
+    4. Confirmación de Jorge de la proporción "~10 agentes por empleado" (P-4 del doc) — no se usa
+       en esta página, solo en servicios-ia.html.
+    5. Registro en Notion de las tareas 11-20 por Melissa (puerta de entrada del backlog).
+-->
+</head>
+<body class="home">
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html">Servicios IA</a>
+    <a href="gobierno-it.html">Gobierno de IT</a>
+    <a href="tecnologias.html">Tecnologías</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. HERO — 260806 (a petición de Alán): titular vuelto al que sigue en vivo en
+       portal-dktec.html, en vez del mensaje raíz de GEN-88 que pedía el §7.1 de la tanda 2
+       (ver nota en la cabecera del fichero). -->
+  <section class="hero">
+    <span class="eyebrow">DKtec</span>
+    <h1>DKtec no te asesora sobre tecnología: la simplifica, la dinamiza y la hace resiliente.</h1>
+    <p>Desde sistemas heredados hasta continuidad ante imprevistos y equipos de IA. Integramos la tecnología con tus objetivos de empresa.</p>
+    <img class="hero-image" src="assets/dktec-equipo-hero.png" alt="Equipo DKtec en su oficina">
+  </section>
+
+  <!-- 2. EL PROBLEMA DEL CEO — sin cambios respecto a portal-dktec.html (la tanda 2 no toca esta sección) -->
+  <section class="section-wide section-split">
+    <div class="section-split-text">
+      <span class="eyebrow">¿Te suena esto?</span>
+      <h2>Las tres preguntas que se hace todo CEO</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="num">1</div>
+          <h3>Riesgo</h3>
+          <p>¿Hasta qué punto estoy en riesgo ante imprevistos?</p>
+          <p>Un solo incidente sin plan puede parar tu operación más tiempo del que crees.</p>
+        </div>
+        <div class="card">
+          <div class="num">2</div>
+          <h3>Eficiencia</h3>
+          <p>¿Cómo puedo ser más eficiente?</p>
+          <p>Cada proceso manual que se automatiza es tiempo que vuelve a tu equipo.</p>
+        </div>
+        <div class="card">
+          <div class="num">3</div>
+          <h3>Competitividad</h3>
+          <p>¿Cómo puedo ser más competitivo?</p>
+          <p>Quien resuelve esto antes ya te lleva ventaja.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-split-media">
+      <img class="section-split-img" src="assets/ceo-agentes-reunion-887x1774.png" alt="CEO reunido con su equipo, hablando de tecnología y gestión de riesgos">
+    </div>
+  </section>
+
+  <!-- 3. LA RESPUESTA DKtec — actualizado 260806 (a petición de Alán): foto trasladada desde
+       quienes-somos.html (assets/dktec-equipo-quienes-somos.png). Debe verse ENTERA (no recortada):
+       clases .resp-top/.resp-top-text/.resp-top-media (assets/styles-dktec.css), imagen a su
+       proporción real; las 3 tarjetas bajan a fila de ancho completo debajo. Mismo cambio aplicado
+       en portal-dktec.html. -->
+  <section class="alt-bg section-wide">
+    <div class="resp-top">
+      <div class="resp-top-text">
+        <span class="eyebrow">La respuesta DKtec</span>
+        <h2>Simplificación, dinamismo y resiliencia</h2>
+        <p>Ayudamos a la empresa mediana a ganar en simplificación, dinamismo y resiliencia. No te asesoramos, lo hacemos por ti: coordinamos lo necesario para que tú no tengas que gestionarlo.</p>
+      </div>
+      <div class="resp-top-media">
+        <img src="assets/dktec-equipo-quienes-somos.png" alt="Equipo DKtec trabajando en una sesión dinámica de trabajo">
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Simplificación</h3>
+        <p>Para reducir costes.</p>
+        <p>Te ayudamos a modernizar los sistemas que ya tienes con IA.</p>
+      </div>
+      <div class="card">
+        <h3>Dinamismo</h3>
+        <p>Para ganar competitividad.</p>
+        <p>Te ayudamos a moverte más rápido que tu mercado, con procesos más ágiles y menos fricción operativa, todo con un equipo de agentes IA a tu servicio.</p>
+      </div>
+      <div class="card">
+        <h3>Resiliencia</h3>
+        <p>Para prepararte ante cualquier imprevisto operativo.</p>
+        <p>Gestión de vulnerabilidades, riesgo tecnológico y planes de continuidad de negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. dkagora.ai — EL HÉROE — sin cambios respecto a portal-dktec.html -->
+  <section id="dkagora" class="section-wide">
+    <div class="hero-secundario hero-secundario--split">
+      <div class="hero-secundario-text">
+        <span class="eyebrow" style="color:var(--verde-brillante);">dkagora.ai</span>
+        <h2>Tu propio equipo de IA</h2>
+        <p>ChatGPT es un genio que acaba de llegar a tu empresa y no conoce a nadie. El agente a medida es un consultor que se va con la llave en el bolsillo. dkagora.ai es tu propio equipo: conoce tu casa, se queda en ella y crece contigo.</p>
+        <div class="advantages-grid">
+          <div class="advantage-mini"><strong>1. Conoce tu empresa</strong>Memoria y contexto propios, no internet genérico.</div>
+          <div class="advantage-mini"><strong>2. Se queda contigo</strong>La caña, no el pez: tu gente construye y modifica sus propios agentes.</div>
+          <div class="advantage-mini"><strong>3. Sabe cuándo parar</strong>Supervisión humana donde importa, vía el agente tutelado.</div>
+          <div class="advantage-mini"><strong>4. Trabajas con ellos como con colegas</strong>Te conocen, los conoces, los supervisas — alucinan mucho menos.</div>
+        </div>
+        <p style="margin-top:1.25rem;">No te vendemos una herramienta de IA. Te montamos tu propio equipo de IA: conoce tu casa, se queda en ella y crece contigo.</p>
+        <div style="margin-top:1rem;">
+          <a class="btn btn-primary" href="servicios-ia.html">Ver Servicios IA →</a>
+        </div>
+      </div>
+      <div class="hero-secundario-media">
+        <img class="hero-secundario-img" src="assets/dktec-equipo-agentes.png" alt="Equipo de DKtec en la oficina, junto al logo DK">
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BUEN GOBIERNO DE IT — bloque propio (260807, a petición de Alán: se elimina la tarjeta
+       de Servicios IA de "Nuestras dos líneas" y esta línea pasa a ser su propio bloque). -->
+  <section class="section-wide">
+    <span class="eyebrow">Buen gobierno de IT</span>
+    <h2>Tratamos el riesgo tecnológico como lo que es: riesgo de negocio</h2>
+    <p>Vulnerabilidades, continuidad y decisiones claras sobre qué pasa si algo falla — sin informes técnicos que no vas a leer.</p>
+    <a class="btn btn-ghost" href="gobierno-it.html">Ver Gobierno de IT →</a>
+  </section>
+
+  <!-- 6. TECNOLOGÍA QUE SOSTIENE NEGOCIOS — NUEVO (doc §7.3). Registro de negocio, sin logos ni
+       detalle contractual (eso vive en /tecnologias); CTA única hacia esa página.
+       260807 (a petición de Alán): mismo estilo "transparente" que el bloque #dkagora (sin panel
+       propio, sobre el fondo verde fijo de la página) — ver id="tecnologia-partners" en
+       assets/styles-dktec-v2.css. -->
+  <section id="tecnologia-partners" class="section-wide">
+    <span class="eyebrow">Tecnología y partners</span>
+    <h2>Tecnología que sostiene negocios</h2>
+    <p style="max-width:none;">Buena parte de las empresas medianas españolas funciona sobre sistemas que llevan años dando servicio y que nadie quiere tocar por miedo a romperlos. Nosotros trabajamos exactamente ahí: los mantenemos vivos, los llevamos a tecnología moderna sin reescribirlos desde cero, y los abrimos al navegador y a la nube cuando toca. No es nostalgia: es que ese sistema es tu negocio.</p>
+    <a class="btn btn-primary" href="tecnologias.html">Ver tecnologías y partners →</a>
+  </section>
+
+  <!-- 7. CON QUIÉN TRABAJAMOS — NUEVO (doc §5). Banda de 5 logos en 2 categorías etiquetadas.
+       Permisos de marca: Jose los declara resueltos (D-3, 2026-08-06); pendiente la petición por
+       escrito a Rocket (P-5 del doc). Albor Services / Agile Corporation: sin logo en assets/
+       todavía — placeholder de texto. -->
+  <section id="con-quien-trabajamos" class="section-wide">
+    <span class="eyebrow">Con quién trabajamos</span>
+    <h2>Con quién trabajamos</h2>
+    <p style="max-width:none;">No lo hacemos todo dentro de casa, y no pretendemos lo contrario. DKtec funciona como una empresa virtual: nosotros gobernamos la entrega y respondemos ante ti, y nos apoyamos en partners especializados para ejecutar. Así te damos el 80% del valor al 20% del coste, sin que tengas que gestionar tú esa complejidad.</p>
+    <!-- 260807 (a petición de Alán): en vez de las 2 categorías apiladas en su propia fila cada
+         una, pasan a una sola fila de 2 columnas (ver .partners-band en styles-dktec-v2.css). -->
+    <div class="partners-band">
+      <div class="partners-category">
+        <span class="partners-category-label">Partners de tecnología</span>
+        <div class="partners-logos-row">
+          <div class="partner-logo-item"><img src="assets/logo-servoy-v3.png" alt="Logo de Servoy"></div>
+          <div class="partner-logo-item"><img src="assets/logo-veryant-v3.png" alt="Logo de Veryant (IsCobol)"></div>
+          <div class="partner-logo-item"><img src="assets/logo-rocket-software.png" alt="Logo de Rocket Software"></div>
+        </div>
+      </div>
+      <div class="partners-category">
+        <span class="partners-category-label">Partners de ejecución</span>
+        <div class="partners-logos-row">
+          <div class="partner-logo-item"><img src="assets/logo-albor-services-v2.png" alt="Logo de Albor Services"></div>
+          <div class="partner-logo-item"><img src="assets/logo-agile-corporation.png" alt="Logo de Agile Corporation"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PRACTICAMOS LO QUE VENDEMOS — NUEVO (doc §3.1). El dogfooding sube de párrafo (antes en
+       quienes-somos.html) a sección propia de la home, junto al trío de avales (seguro RC, red de
+       partners, dogfooding). Argumento de honestidad: DKtec tiene un año; el aval es la propia
+       operación, no un historial de clientes.
+       260807 (a petición de Alán): mismo estilo "transparente" que el bloque #dkagora (sin panel
+       propio, sobre el fondo verde fijo de la página) — ver id="dogfooding" en
+       assets/styles-dktec-v2.css. -->
+  <section id="dogfooding" class="section-wide">
+    <span class="eyebrow">Practicamos lo que vendemos</span>
+    <h2>Lo usamos en nuestra propia casa</h2>
+    <p style="max-width:none;">DKtec es una empresa joven con gente que no lo es. Detrás hay décadas de oficio en los sistemas que sostienen a las empresas medianas españolas — y una decisión: en vez de contarte lo que la IA puede hacer por ti, la hemos aplicado primero a nuestra propia casa. Nuestro aval no es un catálogo de clientes de veinte años. Es que esta empresa ya funciona como queremos que funcione la tuya.</p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Lo usamos en casa</h3>
+        <p>Nuestra propia operación diaria la ejecuta un equipo de agentes de IA con nombre, rol y supervisión humana. No es una demo: es cómo trabajamos cada día.</p>
+      </div>
+      <div class="card">
+        <h3>Red de partners que ejecuta</h3>
+        <p>Funcionamos como empresa virtual: gobernamos la entrega y nos apoyamos en partners especializados para ejecutar. Núcleo pequeño, mucho apalancamiento.</p>
+      </div>
+      <div class="card">
+        <h3>Con respaldo</h3>
+        <p>Contamos con seguro de responsabilidad civil profesional, con cobertura específica frente a la pérdida de datos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA FINAL — sin cambios -->
+  <section class="hero" style="padding:4rem 1.5rem;">
+    <h2 style="color:var(--blanco);">¿Hablamos?</h2>
+    <p>Cuéntanos qué te quita el tiempo hoy.</p>
+    <a class="btn btn-primary" href="contacto.html">Hablemos</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-privacidad.html">Privacidad</a> · <a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+
+</body>
+</html>

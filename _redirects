@@ -1,0 +1,19 @@
+# GEN-72 · Cloudflare Pages — reglas de enrutado para el proyecto PROPIO de
+# dktec.es (260828, a petición de Alán: "dktec.es es un proyecto aparte").
+#
+# Mismo motivo que el _redirects de dkagora.ai (07 Taller/GENESIS/_redirects,
+# ver su cabecera): Cloudflare Pages ya sirve cualquier .html en su ruta
+# limpia de forma automática (portal-dktec.html -> /portal-dktec), así que
+# no hace falta ninguna regla para eso. La única regla que hace falta es
+# esta: la home real del sitio es portal-dktec.html (no index.html, mismo
+# criterio que se usó para dkagora.ai), y eso Cloudflare no lo puede
+# adivinar solo.
+#
+# Este fichero vive en dktec-es-backend/ (no en la raíz de esta carpeta
+# GENESIS) a propósito: la raíz de GENESIS es el repo del proyecto de
+# Cloudflare Pages de dkagora.ai, ya en producción, y su propio _redirects
+# ya tiene la regla equivalente para ESE sitio (home -> portal-dkagora.html).
+# Cuando se cree el proyecto de Cloudflare Pages de dktec.es, este fichero
+# se copia a la raíz de ESE proyecto (quitando la carpeta
+# "dktec-es-backend/"), no se mezcla con el de dkagora.ai.
+/ /portal-dktec.html 200

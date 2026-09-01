@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tecnologías — DKtec (v2, en revisión)</title>
+<meta name="description" content="Servoy, IsCobol y RMCobol: reventa, soporte y desarrollo con los tres fabricantes, para ISVs y responsables de IT.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<style>
+  .rocket-catalog-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; margin-top:1.5rem; text-align:left; }
+  @media (max-width:800px){ .rocket-catalog-grid{ grid-template-columns:1fr; } }
+  .fuente{ display:block; font-size:0.75rem; color:var(--gris-medio); margin-top:0.4rem; }
+
+  /* "Segundo modo" (260824, a petición de Alán): mismo tratamiento "transparente" que
+     #tecnologia-partners/#dogfooding de assets/styles-dktec-v2.css (bloque "dkagora" de la home) —
+     sin panel propio, texto claro directamente sobre el verde fijo de la página. Aquí como clase
+     reutilizable (".transparent-block") en vez de por id, porque se aplica a varias secciones de
+     esta página alternando con el modo normal. Las tarjetas internas (.card) no cambian: siguen
+     blancas y legibles sobre el verde, igual que en el bloque dkagora de la home. */
+  .transparent-block.section-wide, .transparent-block.page-hero{
+    background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+    box-shadow:none; padding:0; margin:1rem auto;
+  }
+  .transparent-block > .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block > h1, .transparent-block > h2, .transparent-block > h3{ color:var(--blanco); }
+  .transparent-block > p{ color:rgba(255,255,255,0.92); }
+  .transparent-block .fuente{ color:rgba(255,255,255,0.7); }
+  /* 260824: por si algún bloque ".transparent-block" pasa a llevar el patrón de
+     ".text-with-placeholder-text" (título/párrafos ya no serían hijos directos, y las reglas ">" de
+     arriba dejarían de aplicarles el color blanco) — mismo recoloreo para ese caso anidado. */
+  .transparent-block .text-with-placeholder-text .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block .text-with-placeholder-text h1,
+  .transparent-block .text-with-placeholder-text h2,
+  .transparent-block .text-with-placeholder-text h3{ color:var(--blanco); }
+  .transparent-block .text-with-placeholder-text p{ color:rgba(255,255,255,0.92); }
+
+  /* Placeholder de imagen (260824, a petición de Alán): caja gris de sustitución, a rellenar más
+     adelante con foto/ilustración real. Mismo criterio visual que ".qs-placeholder" de
+     quienes-somos.html.
+     260824 (2ª, a petición de Alán: "en vez de hacerlos tan anchos y estrechos, mueve textos para
+     que encajen de forma mas natural"): antes ocupaba todo el ancho de la sección con muy poca
+     altura (franja aplanada). Pasa a proporción 16:9 tipo foto, con un ancho máximo y centrado, para
+     que se vea como un hueco de imagen real y no como una franja de texto. */
+  .img-placeholder{
+    border:2px dashed var(--gris-claro); border-radius:1rem; background:#F2F2F2;
+    aspect-ratio:16/9;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem; color:var(--gris-medio); text-align:center; padding:1rem;
+  }
+  /* 260824 (a petición de Alán: "pon las imagenes a la derecha del bloque de texto"): el texto y el
+     placeholder pasan a ir uno junto al otro en vez de apilados. Contenedor local propio (no
+     reutiliza ".section-split" del home para no depender de su comportamiento en breakpoints que no
+     he podido revisar aquí) — en pantallas estrechas el placeholder baja debajo del texto. */
+  .text-with-placeholder{ display:flex; align-items:stretch; gap:2rem; flex-wrap:wrap; margin-top:1rem; }
+  .text-with-placeholder > .text-with-placeholder-text{ flex:1 1 320px; }
+  .text-with-placeholder > .text-with-placeholder-text h2{ font-size:1.5rem; }
+  .text-with-placeholder > .img-placeholder{ flex:1 1 260px; max-width:340px; margin:0; aspect-ratio:unset; }
+  @media (max-width:700px){ .text-with-placeholder > .img-placeholder{ flex-basis:100%; max-width:none; } }
+  /* 260826 (a petición de Alán: "añade esta imagen dentro del placeholder"): en "Por qué existimos
+     en esta capa" el placeholder gris se sustituye por una foto real — misma caja (mismo flex-basis/
+     max-width que ".img-placeholder" arriba), pero clase propia (".img-placeholder-photo") porque
+     una <img> no necesita el fondo gris/borde punteado ni el aspect-ratio del placeholder, y sí
+     necesita object-fit para rellenar la caja sin deformarse. */
+  .text-with-placeholder > .img-placeholder-photo{
+    flex:1 1 260px; max-width:340px; width:100%; height:100%;
+    object-fit:cover; border-radius:1rem; box-shadow:0 12px 32px rgba(0,0,0,0.18); display:block;
+  }
+  @media (max-width:700px){ .text-with-placeholder > .img-placeholder-photo{ flex-basis:100%; max-width:none; } }
+
+  /* Tarjetas de "Qué sabemos de cada tecnología" (260826, a petición de Alán: "separa este bloque en
+     tres tarjetas diferentes"): antes Servoy/IsCobol/RMCobol eran tres bloques de h3+párrafos
+     apilados dentro de la misma sección. Pasan a tres ".card" independientes en ".grid-3" (mismo
+     patrón que "Dos caminos", más abajo en esta página). ".card p" trae margin:0 por defecto (pensado
+     para un solo párrafo por tarjeta) — aquí cada tarjeta lleva tres, así que se añade separación
+     vertical entre ellos, sin tocar la regla base compartida. */
+  .tech-detail-cards .card p{ margin-bottom:1rem; }
+  .tech-detail-cards .card p:last-child{ margin-bottom:0; }
+  /* 260826 (a petición de Alán: "haz los titulos aqui mas grandes"): ".card h3" (assets/styles-dktec.css)
+     es una regla compartida por todas las tarjetas del sitio (esta sección, "Dos caminos", el
+     catálogo Rocket, etc.) — se sube el tamaño solo aquí, scoped a ".tech-detail-cards", para no
+     afectar a las demás. */
+  .tech-detail-cards .card h3{ font-size:1.35rem; margin-bottom:0.75rem; }
+  /* 260826 (a petición de Alán: "haz estos 3 bloques mas claros y faciles de leer"): otra vez scoped
+     a ".tech-detail-cards" para no tocar ".card" en el resto del sitio. Cuatro ajustes: (1) más
+     interlineado en el cuerpo (1.5, la base no fija ninguno — hereda el de "body", más apretado);
+     (2) el texto sube ligeramente de 0.95rem (base de ".card p") a 1rem; (3) más aire dentro de la
+     tarjeta (padding de 1.75rem, el de ".card" base, a 2rem); (4) las etiquetas en negrita ("Por qué
+     vía DKtec:", "Nuestro papel:") pasan del gris oscuro del texto normal al verde de marca, para que
+     se distingan de un vistazo como sub-apartados dentro de la tarjeta, en vez de mezclarse con el
+     resto del párrafo. */
+  .tech-detail-cards .card{ padding:2rem; }
+  .tech-detail-cards .card p{ font-size:1rem; line-height:1.6; }
+  .tech-detail-cards .card p strong{ color:var(--verde-principal); }
+</style>
+<!--
+  GEN-72 (Portal de DKtec, web dktec.es) · tecnologias-v2.html — vista previa de la tanda 2
+  Ejecuta: Linus · Dirige/supervisa: Alán
+  Requisitos: 20 WORKSPACE/Proyectos/GENESIS/GEN-72-requisitos-adicionales-tanda2-partners-y-paginas-de-linea_260806_1534.md
+              (v2.3) §8 completo — tarea 20. Amplía GEN-72-requisitos-portal-dktec_260723_1645.md (v1.0 §8).
+  Encargo: Alán, chat directo con Linus, 2026-08-24 ("crea versiones para la v2").
+
+  Público: ISV, SSV y responsable de IT (§8, mantiene puerta propia tras salir del relato de home/
+  quienes-somos-v2 por D-10 — ver §4 del doc). Única página del sitio donde se permite jerga técnica
+  (v1.0 §8). D-4/D-6: la página vuelve al nav (antes huérfana, ver estado_del_portal_al_redactar del
+  doc) y se amplía mucho: posicionamiento + fichas + criterio de elección + servicios + catálogo
+  Rocket. NO se toca tecnologias.html (sigue huérfana/sin enlazar, tal y como la dejó la decisión de
+  Alán del 260731) ni aplica aquí la norma "-old_260806" del §2 (fichero nuevo, no edición in situ).
+
+  Material factual de §8.2 (Servoy/IsCobol/RMCobol) integrado casi literal — verificado por Cassie/
+  Linda contra los dossieres de investigación del 260731, no se ha vuelto a investigar. Criterio de
+  elección IsCobol/RMCobol de §8.3 y fórmula de gobierno de §8.4 en el texto tal como pide el doc.
+  Norma de neutralidad §8.6 aplicada: ningún argumento a favor de una tecnología/partner nuestra va
+  en contra de otra — ni implica que un fabricante desatienda o no aconseje bien.
+
+  Restricciones de §11 respetadas: sin "exclusivo"/"único partner en España" (relaciones no
+  exclusivas); sin condiciones económicas de contrato; sin cifras de negocio de Veryant o Servoy sin
+  atribuir; sin referencias de clientes del fabricante como cartera propia; cifras de mercado solo
+  con atribución (TBRC/Dataintelo/Keyhole); sin "años de experiencia" con estas tecnologías (los tres
+  contratos son de junio-julio de 2025); sin insinuar plantilla propia de desarrollo COBOL/Servoy.
+
+  BLOQUEOS ABIERTOS (doc §15: "puede redactar dejando esos fragmentos marcados; no puede darlos por
+  cerrados") — 260824 (4ª, a petición de Alán): los recuadros ".copy-pendiente" y las líneas
+  "Fuente:" visibles en la página se retiran del cuerpo (ver nota más abajo); el aviso sigue vivo
+  aquí, en el fichero, para no darlos por cerrados sin más. No quitar el noindex hasta que se
+  resuelvan:
+  - P-3b (Jose): si el alcance incluye explícitamente preventa y demostraciones (el contrato de
+    Rocket las concede: Sales Assist + Demo).
+  - P-3c (Jose): quién es el partner de ejecución técnica de migración COBOL / desarrollo Servoy —
+    la banda de partners de home (Albor Services, Agile Corporation) no cubre esta ejecución. Bloquea
+    publicar la promesa de ejecución como cerrada.
+  - P-3d (Erin): respaldo contractual del SERVICIO en Veryant — su contrato es de distribución/
+    reventa y los dossieres no le atribuyen cláusula de servicios profesionales (Rocket y Servoy sí).
+  - P-6 (Erin/Seo): revalidar que la web de Veryant sigue listando a DKtec como partner de España/
+    Andorra/Portugal antes de quitar el noindex.
+  - P-7 (Erin): confirmar el territorio EMEA+LATAM del catálogo Rocket antes de publicarlo como
+    reclamo.
+
+  Fuentes internas de cada bloque (antes visibles como línea "Fuente:", ahora solo aquí):
+  Servoy — dossier GEN-72-investigacion-profunda-servoy-iscobol-rmcobol_260731 · contrato
+  Servoy-DKtec (Partner POF). IsCobol — mismo dossier · web de Veryant (partner locator). RMCobol y
+  catálogo Rocket — dossier GEN-72-investigacion-profunda-catalogo-rocket-software_260731 · catálogo
+  público de Rocket Software.
+
+  Fórmula de gobierno ("nosotros gobernamos la entrega, el partner ejecuta"): reproducida en el
+  §"Nuestros servicios en esta línea" con la MISMA redacción exacta que gobierno-it.html §10.1, tal
+  como exige el criterio de aceptación 25 del doc (una sola formulación en todo el sitio, no tres
+  variantes) — no la redacción ligeramente distinta del borrador de §8.4.
+
+  Copy: borrador literal de Cassie/Linda sobre material de Jimmy (dossieres 260731), pendiente del
+  pulido final de Jimmy (T20). noindex a propósito: alcance con bloqueos abiertos (arriba) y sin
+  revisión legal de Erin (T23).
+
+  ACTUALIZACIÓN 260824 (a petición de Alán): el bloque "Ficha por tecnología" pasó a usar recuadros
+  grises con todo el detalle dentro de cada tarjeta — Alán pidió volver al estilo visual con el que
+  ya está familiarizado, el de las tres tarjetas-botón compactas de tecnologias.html / bloque
+  "Modernización de legacy" de portal-dktec.html (#por-que-fiarte): tarjeta blanca redondeada,
+  logo arriba, una frase, CTA verde "Ver más →", con animación de elevación al pasar el ratón. Esas
+  clases (.tech-cards-row, .tech-card-logo, .tech-card-top, .tech-card-logo-img, .tech-card-cta) ya
+  viven en assets/styles-dktec.css (compartida) — se elimina el override local que las sobrescribía
+  aquí (el que producía el recuadro gris) y se usan tal cual. Los párrafos largos de §8.2 (qué es,
+  por qué vía DKtec, nuestro papel, fuentes y los avisos ".copy-pendiente" de P-3d/P-3b) no
+  desaparecen: se trasladan a la sección "Qué sabemos de cada tecnología", justo debajo de las
+  tarjetas — así la ficha compacta sigue enlazando a tecnologia-servoy.html / -iscobol / -rmcobol
+  y el detalle exigido por el documento sigue publicado en esta misma página.
+
+  ACTUALIZACIÓN 260824 (2ª, a petición de Alán): se retira la clase local ".tech-panel" (y su regla
+  en el <style> de arriba) de las secciones "Qué sabemos de cada tecnología" y "Catálogo Rocket" —
+  fijaba background:blanco sólido, max-width:1040px y margin:0 auto, pisando el max-width:1100px,
+  el padding y sobre todo el margin:4.5rem auto de ".section-wide" (assets/styles-dktec.css), que es
+  el que da a TODAS las secciones de TODAS las páginas de la tanda 2 el mismo margen. Alán pidió que
+  el margen fuera igual en todas las páginas: ambas secciones pasan a usar solo ".section-wide" (sin
+  clase propia), igual que el resto de bloques de esta misma página y de gobierno-it.html/
+  servicios-ia.html.
+
+  ACTUALIZACIÓN 260824 (3ª, a petición de Alán): los "Ver más →" de las tres tarjetas apuntaban a
+  tecnologia-servoy.html / -iscobol / -rmcobol (las páginas de detalle en vivo, con el nav antiguo de
+  4 enlaces). Se crean tecnologia-servoy-v2.html / tecnologia-iscobol-v2.html /
+  tecnologia-rmcobol-v2.html — mismo contenido, nav de la familia v2 — y los tres enlaces pasan a
+  apuntar ahí.
+
+  ACTUALIZACIÓN 260824 (4ª, a petición de Alán: "quita todos estos apartados"): se retiran de la
+  vista los cuatro recuadros amarillos ".copy-pendiente" y las cuatro líneas grises "Fuente:" a nivel
+  de bloque (Servoy, IsCobol, RMCobol, Catálogo Rocket) — Alán los veía como ruido visual. El aviso
+  de cada bloqueo (P-3b/P-3c/P-3d/P-7) y la cita de cada dossier interno NO desaparecen: se
+  trasladan al comentario "BLOQUEOS ABIERTOS" de más arriba, para no darlos por cerrados sin más
+  (doc §15) aunque ya no se vean en la página. La regla CSS ".copy-pendiente" se elimina del <style>
+  por quedar sin uso. NO se toca la única atribución que exige el documento en el propio texto — la
+  del párrafo "Por qué ahora" (§11.6, cifras de mercado solo con atribución) — porque va integrada en
+  la frase, no como recuadro/línea aparte, y quitarla dejaría una cifra de mercado sin atribuir.
+
+  ACTUALIZACIÓN 260824 (5ª, a petición de Alán): las secciones de la página alternan ahora entre dos
+  modos, empezando por el segundo. "Modo normal" = como estaban (panel claro, ".section-wide" con o
+  sin ".alt-bg"). "Segundo modo" = el mismo tratamiento "transparente" del bloque dkagora de la home
+  (#tecnologia-partners/#dogfooding en assets/styles-dktec-v2.css): sin panel, texto claro
+  directamente sobre el verde fijo de la página — aquí como clase ".transparent-block" reutilizable
+  (ver <style> de arriba). Orden resultante: "Por qué existimos" (2º modo) · "Las tres tecnologías"
+  (normal, sin cambios) · "Qué sabemos de cada tecnología" (2º modo) · "Dos caminos" (normal, sin
+  cambios) · "Nuestros servicios en esta línea" (2º modo, pierde su ".alt-bg" anterior) · "Catálogo
+  Rocket" (normal, sin cambios). Las tarjetas (.card) dentro de cualquier sección no cambian de
+  estilo en ningún modo. Se recolorea a blanco/verde-brillante el párrafo "Por qué ahora" (antes gris
+  oscuro, ilegible sobre verde) al caer ahora dentro de un bloque transparente.
+
+  ACTUALIZACIÓN 260824 (6ª, a petición de Alán: "empieza al revés"): se invierte el punto de partida
+  de la alternancia — ya no empieza en el 2º modo (transparente), empieza en modo normal. Orden
+  resultante: "Por qué existimos" (normal) · "Las tres tecnologías" (2º modo, pierde su ".alt-bg"
+  anterior) · "Qué sabemos de cada tecnología" (normal, el párrafo "Por qué ahora" vuelve a su gris
+  original) · "Dos caminos" (2º modo) · "Nuestros servicios en esta línea" (normal, recupera
+  ".alt-bg") · "Catálogo Rocket" (2º modo).
+
+  ACTUALIZACIÓN 260824 (7ª, a petición de Alán): el bloque superior (".page-hero", título +
+  entradilla) pasa también al 2º modo (transparente) — antes quedaba fuera de la alternancia por no
+  ser un ".section-wide". Se añade ".page-hero" al selector de fondo de ".transparent-block" (ver
+  <style> de arriba) y esa clase a la sección.
+
+  ACTUALIZACIÓN 260824 (8ª, a petición de Alán: "quita este texto"): se retira por completo el
+  párrafo "Por qué ahora" (cifras de mercado de modernización COBOL, con fuente TBRC/Dataintelo/
+  Keyhole) de "Qué sabemos de cada tecnología". AVISO: este párrafo era la única atribución de cifras
+  de mercado que exigía el doc §11.6 en todo el sitio (ver nota de la actualización 4ª, más arriba,
+  sobre por qué no se había tocado hasta ahora); al quitarlo entero, la cifra de mercado desaparece
+  del sitio en vez de quedar sin atribuir — no hay ninguna cifra de mercado sin fuente en ningún otro
+  sitio de la página. Si se quiere reintroducir ese dato más adelante, debe llevar la misma
+  atribución.
+
+  ACTUALIZACIÓN 260825 (a petición de Alán: "casmbia la frase, a traves de partners locales por a
+  traves de nosotros, y que cada vez que se hable de partners locales que ponga nosotros"):
+  - "Por qué existimos en esta capa": "a través de partners locales" → "a través de nosotros".
+  - RMCobol / "Por qué vía DKtec": "esa cercanía la aporta el partner local" → "esa cercanía la
+    aportamos nosotros".
+  NO se ha tocado la otra mención de "partners locales" en esa misma frase de RMCobol ("Rocket opera
+  con una red global de partners locales") ni "el partner aporta la proximidad" en "Por qué existimos
+  en esta capa", ni "Somos partner local de los tres fabricantes" en "Nuestros servicios en esta
+  línea" — la primera describe la red mundial de Rocket (no solo a DKtec, sería incorrecto decir que
+  DKtec es toda esa red global), y las otras dos ya hablan en primera persona/genérico sin nombrar
+  "partners locales" literalmente. Si Alán quiere que también cambien, que lo diga y se ajustan.
+
+  ACTUALIZACIÓN 260825 (2ª, a petición de Alán: "resume un poco la tarjeta de veryant para que
+  mantenga el mismo tamaño que las otras tarjetas"): la tarjeta de IsCobol/Veryant en "Servoy, IsCobol
+  y RMCobol" (tech-cards-row) salía más alta que las de Servoy y RMCobol. Medido el renderizado real,
+  la causa principal NO era el texto (con la frase original, los tres párrafos medían casi lo mismo)
+  sino el LOGO: el de Veryant es más "cuadrado" que los de Servoy/Rocket, así que a la misma anchura
+  fija escalaba mucho más alto, y al ir apilado encima del texto (".tech-card-top" es una columna),
+  esa diferencia de logo se traducía en tarjetas de distinta altura — se arregla limitando ese logo
+  por altura en vez de por anchura (ver ".tech-card-logo-img[src*='veryant']" en
+  assets/styles-dktec.css, junto a su explicación). Con el logo ya arreglado, el párrafo de Veryant
+  seguía siendo una línea más largo que los otros dos (2 frases contra 1) — se recorta ligeramente
+  ("La propia Veryant lista a DKtec como su partner para" → "Veryant lista a DKtec como su partner
+  en"), sin perder el hecho de que es la propia Veryant quien lista a DKtec como su partner. Resultado:
+  las tres tarjetas quedan prácticamente igualadas en alto.
+
+  ACTUALIZACIÓN 260826 (a petición de Alán: "quiero que subas este bloque de reventa entre esos dos
+  bloques"): la sección "Nuestros servicios en esta línea" (Reventa, soporte, migración, desarrollo y
+  soporte continuado) se traslada de su posición anterior (entre "Dos caminos" y "Catálogo Rocket") a
+  justo después de "Servoy, IsCobol y RMCobol" (tech-cards-row) y antes de "Qué sabemos de cada
+  tecnología". Solo cambia el orden en el HTML — ni el texto del bloque ni sus estilos (.alt-bg
+  section-wide) se han tocado.
+
+  ACTUALIZACIÓN 260826 (2ª, a petición de Alán: "haz que mantengan el orden de transparente opaco
+  transparente"): el traslado anterior del bloque "reventa" rompió la alternancia visual
+  transparente/opaco que llevaba la página (quedaban "Qué sabemos de cada tecnología" y "Dos
+  caminos" opaco+transparente seguidos de "Dos caminos" y "Catálogo Rocket" transparente+
+  transparente, dos iguales seguidos). Se restaura la alternancia SOLO cambiando de clase (sin
+  tocar contenido ni orden): "Qué sabemos de cada tecnología" pasa de opaco (".section-wide") a
+  transparente (".transparent-block.section-wide"), y "Dos caminos" pasa de transparente a opaco
+  (se le quita ".transparent-block"). Secuencia resultante: "Por qué existimos" (opaco) · "Las tres
+  tecnologías" (transparente) · "Nuestros servicios en esta línea" (opaco, .alt-bg) · "Qué sabemos
+  de cada tecnología" (transparente) · "Dos caminos" (opaco) · "Catálogo Rocket" (transparente).
+
+  ACTUALIZACIÓN 260826 (3ª, a petición de Alán: "separa este bloque en tres tarjetas diferentes"):
+  "Qué sabemos de cada tecnología" pasa de tres bloques de h3+párrafos apilados a tres ".card"
+  independientes en ".grid-3" (mismo patrón que "Dos caminos"). Texto sin cambios. Ver
+  ".tech-detail-cards" en el <style> de arriba para el único ajuste de CSS necesario (separación
+  entre los tres párrafos de cada tarjeta, que ".card p" no traía por defecto).
+
+  ACTUALIZACIÓN 260826 (4ª, a petición de Alán: "añade esta imagen dentro del placeholder"): en
+  "Nuestros servicios en esta línea" (bloque "reventa") se sustituye el placeholder gris
+  ("migración/modernización de sistemas legacy") por una foto real — assets/dktec-equipo-reunion-
+  migracion.png (equipo DKtec junto al logo DK, revisando un diagrama). Misma clase
+  ".img-placeholder-photo" ya creada para el caso equivalente de "Por qué existimos en esta capa",
+  más arriba en esta misma página. -->
+</head>
+<body>
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html">Servicios IA</a>
+    <a href="gobierno-it.html">Gobierno de IT</a>
+    <a href="tecnologias.html" aria-current="page">Tecnologías</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="transparent-block page-hero">
+    <span class="eyebrow">Tecnologías</span>
+    <h1>El canal español de Servoy, IsCobol y RMCobol</h1>
+    <p>Para ISVs y SSVs españoles, medianos y consolidados, con base tecnológica heredada — y para el responsable de IT que evalúa esta ruta. Registro técnico. Sin carrito ni precios: esta página es una credencial, no una tienda.</p>
+  </section>
+
+  <section class="section-wide">
+    <div class="text-with-placeholder">
+      <div class="text-with-placeholder-text">
+        <h2>Por qué existimos en esta capa</h2>
+        <p>Los tres fabricantes con los que trabajamos operan en España a través de nosotros — así está organizado el sector. El fabricante construye y evoluciona el producto; el partner aporta la proximidad: idioma, zona horaria y conocimiento del negocio del cliente. Son papeles complementarios. Nosotros somos ese canal en España para Servoy, Veryant y Rocket Software: la relación contractual, el soporte local y, según la tecnología, la construcción y el mantenimiento de lo que se monta encima.</p>
+      </div>
+      <img class="img-placeholder-photo" src="assets/dktec-canal-datacenter.png" alt="Persona con acreditación de visitante de DKtec en un centro de datos, junto a filas de racks de servidores.">
+    </div>
+  </section>
+
+  <section class="transparent-block section-wide">
+    <span class="eyebrow">Las tres tecnologías</span>
+    <h2>Servoy, IsCobol y RMCobol</h2>
+    <p>Prueba de competencia, no un catálogo: esto es lo que hacemos, técnicamente, con cada una de las tres.</p>
+    <div class="tech-cards-row">
+      <a class="card tech-card-logo" href="tecnologia-servoy.html">
+        <div class="tech-card-top">
+          <img class="tech-card-logo-img" src="assets/logo-servoy-v3.png" alt="Logo de Servoy">
+          <div class="tech-card-logo-text">
+            <h3>Servoy</h3>
+            <p>DKtec es reseller no exclusivo desde 2025. Puede revenderlo, construir tu aplicación de negocio sobre él y también ofrecerlo como producto propio.</p>
+            <span class="tech-card-cta">Ver más →</span>
+          </div>
+        </div>
+      </a>
+      <a class="card tech-card-logo" href="tecnologia-iscobol.html">
+        <div class="tech-card-top">
+          <img class="tech-card-logo-img" src="assets/logo-veryant-v3.png" alt="Logo de Veryant">
+          <div class="tech-card-logo-text">
+            <h3>IsCobol</h3>
+            <p>DKtec es distribuidor/reseller no exclusivo desde 2025, con soporte local y migración acompañada. Veryant lista a DKtec como su partner en España, Andorra y Portugal.</p>
+            <span class="tech-card-cta">Ver más →</span>
+          </div>
+        </div>
+      </a>
+      <a class="card tech-card-logo" href="tecnologia-rmcobol.html">
+        <div class="tech-card-top">
+          <img class="tech-card-logo-img" src="assets/logo-rocket-software.png" alt="Logo de Rocket Software">
+          <div class="tech-card-logo-text">
+            <h3>RMCobol</h3>
+            <p>DKtec es partner no exclusivo desde 2025, con el alcance más amplio: reventa, apoyo en la venta, demostraciones y servicios profesionales de implementación.</p>
+            <span class="tech-card-cta">Ver más →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="alt-bg section-wide">
+    <div class="text-with-placeholder">
+      <div class="text-with-placeholder-text">
+        <span class="eyebrow">Nuestros servicios en esta línea</span>
+        <h2>Reventa, soporte, migración, desarrollo y soporte continuado</h2>
+        <p>Aquí no nos limitamos a venderte la licencia. Somos partner local de los tres fabricantes, así que la contratas con nosotros y el soporte lo pides en español — pero además hacemos el trabajo: llevamos tu sistema COBOL a tecnología moderna sin reescribirlo, construimos sobre Servoy la aplicación que tu negocio necesita, y nos quedamos después para mantenerla.</p>
+        <p>Nos apoyamos en partners especializados para ejecutar, y gobernamos la entrega: tú tienes un interlocutor, no una lista de proveedores. Y como trabajamos con las tres tecnologías, la conversación empieza por tu situación y no por un producto.</p>
+      </div>
+      <img class="img-placeholder-photo" src="assets/dktec-equipo-reunion-migracion.png" alt="Equipo de DKtec reunido en torno a un portátil, revisando un diagrama de arquitectura, junto al logo DK.">
+    </div>
+  </section>
+
+  <section class="transparent-block section-wide">
+    <span class="eyebrow">En detalle</span>
+    <h2>Qué sabemos de cada tecnología</h2>
+
+    <div class="grid-3 tech-detail-cards">
+      <div class="card">
+        <h3>Servoy</h3>
+        <p>Plataforma low-code para construir aplicaciones de negocio propias — gestión, control de producción, seguimiento de pedidos — que no existen "de catálogo". Pensada para desarrolladores profesionales, no para arrastrar cajas: control total del código por debajo, velocidad por encima. Una sola base para navegador, móvil y escritorio. Fabricante: Servoy BV (Ámsterdam, Países Bajos).</p>
+        <p><strong>Por qué vía DKtec:</strong> Servoy llega a España a través de su canal — nosotros somos ese canal, con la relación y el soporte en local.</p>
+        <p><strong>Nuestro papel:</strong> reventa, soporte local y construcción de la aplicación sobre la plataforma — el contrato lo respalda expresamente vía cláusula <em>stand-alone</em>, que permite ofrecerlo también como producto propio de DKtec, no solo como licencia de un tercero.</p>
+      </div>
+      <div class="card">
+        <h3>IsCobol</h3>
+        <p>Toma un programa COBOL y lo traduce para que funcione sobre Java moderno sin reescribirlo. El sistema sigue haciendo lo mismo, pero ya puede ejecutarse en cualquier servidor actual — incluso desde un navegador — y deja de depender de máquinas obsoletas, cada año más caras de mantener y con menos gente capaz de tocarlas. Fabricante: Veryant LLC (San Diego, EE. UU.).</p>
+        <p><strong>Por qué vía DKtec:</strong> el fabricante opera en Europa por canal; para un sistema COBOL crítico, tener el soporte en tu idioma y tu zona horaria es una ventaja concreta. La propia web de Veryant lista a DKtec como su partner para España, Andorra y Portugal — la única de las tres relaciones confirmada públicamente por el fabricante.</p>
+        <p><strong>Nuestro papel:</strong> reventa, soporte local y migración acompañada.</p>
+      </div>
+      <div class="card">
+        <h3>RMCobol</h3>
+        <p>Motor que permite que una aplicación COBOL funcione igual en Windows, Linux o Unix sin adaptar el código para cada sistema — la opción más clásica y probada, pensada sobre todo para software que debe comportarse igual dondequiera que lo instale el cliente. Fabricante: Rocket Software (Waltham, Massachusetts), que en 2024 incorporó el negocio de modernización de aplicaciones de OpenText, ampliando su base de clientes y su red de partners. En septiembre de 2025 anunció mejoras en su familia COBOL orientadas a modernizar sin disrupción: asistencia de desarrollo con GenAI opcional, soporte para procesadores ARM y despliegue de bajo riesgo hacia cloud y contenedores.</p>
+        <p><strong>Por qué vía DKtec:</strong> Rocket opera con una red global de partners locales; en España, esa cercanía la aportamos nosotros.</p>
+        <p><strong>Nuestro papel:</strong> el alcance contractual más amplio de los tres — reventa, apoyo en la venta y servicios profesionales de implementación.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section-wide">
+    <span class="eyebrow">IsCobol o RMCobol</span>
+    <h2>Dos caminos, según lo que necesites — no dos generaciones</h2>
+    <p>Las dos tecnologías resuelven necesidades distintas sobre una misma base COBOL. No hay una que sustituya a la otra: son dos partners nuestros, y elegir entre ellas depende de tu situación, no de cuál es "más moderna".</p>
+    <div class="grid-3" style="grid-template-columns:1fr 1fr;">
+      <div class="card">
+        <h3>RMCobol — continuidad y portabilidad</h3>
+        <p>Cuando la prioridad es que la aplicación siga funcionando igual en cualquier sistema operativo, con su propio runtime y sin cambiar de arquitectura. Riesgo mínimo.</p>
+      </div>
+      <div class="card">
+        <h3>IsCobol — más recorrido tecnológico</h3>
+        <p>Cuando la prioridad es que ese mismo COBOL pase a ejecutarse sobre Java y se abra al navegador y a la infraestructura moderna. Más cambio, más alcance.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.25rem;">Trabajamos con las dos, así que la conversación empieza por tu situación, no por un producto.</p>
+  </section>
+
+  <section class="transparent-block section-wide">
+    <span class="eyebrow">Más allá de RMCobol</span>
+    <h2>Catálogo Rocket con encaje en tu sistema</h2>
+    <p>Nuestro contrato con Rocket cubre el catálogo de Infrastructure, Data y Application Modernization en territorio EMEA y LATAM. Estos son los que más encajan con el mismo tipo de cliente que RMCobol:</p>
+    <div class="rocket-catalog-grid">
+      <div class="card">
+        <h3>Rocket MultiValue (UniData/UniVerse)</h3>
+        <p>Bases de datos MultiValue con casi 60 años de historia continuada bajo distintos fabricantes — mismo perfil de cliente que RMCobol: un sistema de negocio antiguo que funciona y que no se quiere perder.</p>
+      </div>
+      <div class="card">
+        <h3>Rocket jBASE</h3>
+        <p>Otra base MultiValue, sin máquina virtual: se compila como ejecutable del sistema operativo. Filosofía más cercana a RMCobol que a IsCobol.</p>
+      </div>
+      <div class="card">
+        <h3>Rocket Modern Experience</h3>
+        <p>No cambia el motor, cambia la cara: convierte pantallas verdes de mainframe o IBM&nbsp;i en interfaz web moderna, sin tocar la lógica de negocio.</p>
+      </div>
+      <div class="card">
+        <h3>Rocket DataEdge</h3>
+        <p>Conecta datos de mainframe, sistemas distribuidos y nube para prepararlos para analítica e IA — el puente natural hacia nuestra línea de <a href="servicios-ia.html">Servicios IA</a> una vez modernizado el motor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero" style="padding:4rem 1.5rem;">
+    <h2 style="color:var(--blanco);">¿Hablamos de tu sistema?</h2>
+    <a class="btn btn-primary" href="contacto.html">Hablemos</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-privacidad.html">Privacidad</a> · <a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+
+</body>
+</html>

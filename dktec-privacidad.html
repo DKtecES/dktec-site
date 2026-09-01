@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad — DKtec</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<style>
+  /* Mismo tratamiento que contacto.html (260730, a petición de Alán): panel sin el dibujo de fondo
+     y la intro (antes .page-hero aparte) fusionada dentro del mismo bloque que el texto legal, un
+     único panel blanco en vez de dos apilados.
+     260828 (a petición de Alán: "la pagina de politica de privacidad sigue siendo la antigua") —
+     revierte la fusión de arriba: mismo motivo que en contacto.html (ver nota de esa fecha en ese
+     fichero). El título vuelve a un ".page-hero" independiente, ahora ".transparent-block" (texto
+     claro sobre el verde fijo, igual que el resto de páginas modernizadas de tanda 2); el panel con
+     el texto legal queda como segundo bloque, opaco, y ".legal-panel" sigue en blanco. */
+  .transparent-block.page-hero{
+    background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+    box-shadow:none; padding:0; margin:1rem auto 1.75rem;
+  }
+  .transparent-block > h1{ color:var(--blanco); }
+  .legal-panel{ background:var(--blanco); }
+</style>
+<!--
+  GEN-72 · /privacidad — dktec.es
+  Contenido: Erin (Legal). Maqueta: Linus.
+
+  DECISIÓN DE ALÁN (2026-07-30): dktec-privacidad.html es el fichero DEFINITIVO de esta página — no
+  se crean más versiones con sufijo AAMMDD_HHMM; cualquier cambio futuro se edita en este mismo
+  fichero. Sustituye a dktec-privacidad_260729_1058.html / dktec-privacidad_260730_1025.html, que
+  quedan como historial.
+
+  Se reutilizan literalmente los datos legales que Erin ya confirmó para la página equivalente de
+  dkagora.ai (privacidad.html, actualización 260724: NIF B22480396, domicilio Calle Encina 17,
+  28290 Las Rozas de Madrid, Microsoft 365 como encargado del tratamiento) — es la misma persona
+  jurídica (DKtec Tecnologías de la Información, S.L.), así que esos datos no son una invención
+  para esta página, son un hecho reutilizado. Lo que SÍ cambia respecto a la de dkagora.ai y debe
+  revisar Erin explícitamente:
+    1. El texto ahora habla del formulario de /contacto de dktec.es como punto único de todo el
+       ecosistema (dktec.es + dkagora.ai), no solo del formulario de dkagora.ai — coherente con la
+       centralización de GEN-88 §5, pero es un cambio de alcance que Erin debe validar, no asumir.
+    2. Sigue sin "Última actualización" — no está publicada, igual que su equivalente de dkagora.ai.
+    3. El email de contacto de privacidad se mantiene como dkagora@dktec.es (el mismo buzón que ya
+       usa dkagora.ai) a falta de que Melissa/Alán decidan si dktec.es usa un buzón propio.
+  Marcada noindex hasta que Erin la cierre.
+
+  ACTUALIZACIÓN 260730 (a petición de Alán): se retira el <div class="draft-banner"> visual. Es
+  SOLO ESTÉTICO — el <meta name="robots" content="noindex,nofollow"> se mantiene: el contenido
+  sigue sin la validación final de Erin. No indexar ni publicar hasta que la cierre.
+
+  ACTUALIZACIÓN 260828 (a petición de Alán: "la pagina de politica de privacidad sigue siendo la
+  antigua"): misma modernización que contacto.html (ver esa fecha en ese fichero) — se añade
+  assets/styles-dktec-v2.css; el nav de cabecera pasa a llevar "Servicios IA" y "Gobierno de IT"
+  (antes solo Inicio/Tecnologías/Quiénes somos/Contacto) y el enlace de "Tecnologías" pasa de la
+  ancla antigua portal-dktec.html#por-que-fiarte a tecnologias.html; el título "Política de
+  privacidad" se separa del panel de texto legal y pasa a ".transparent-block page-hero" propio.
+-->
+</head>
+<body>
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html">Servicios IA</a>
+    <a href="gobierno-it.html">Gobierno de IT</a>
+    <a href="tecnologias.html">Tecnologías</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="transparent-block page-hero">
+    <h1>Política de privacidad</h1>
+  </section>
+
+  <section class="section-narrow legal-panel" style="text-align:left;">
+    <div class="legal-text">
+      <p class="updated"><em>Última actualización: [fecha de publicación — pendiente]</em></p>
+
+      <h2>1. Responsable del tratamiento</h2>
+      <p>DKtec Tecnologías de la Información, S.L. (en adelante, "DKtec"), con NIF B22480396, domicilio en Calle Encina, 17, 28290 Las Rozas de Madrid, es la responsable del tratamiento de los datos personales que nos facilitas a través del formulario de contacto de dktec.es, punto único de contacto de todo el ecosistema DKtec / dkagora.ai.</p>
+      <p>Para cualquier cuestión relacionada con tus datos, puedes escribirnos a dkagora@dktec.es.</p>
+
+      <h2>2. Qué datos tratamos</h2>
+      <p>Los que nos facilitas voluntariamente al rellenar el formulario de contacto: nombre, empresa, email, teléfono (si lo indicas), número de empleados de tu empresa y la descripción que nos escribes de tu necesidad.</p>
+
+      <h2>3. Con qué finalidad</h2>
+      <p>Para responder a tu solicitud de contacto, entender tu caso y prepararte una propuesta comercial a medida. No usamos tus datos con ningún otro fin.</p>
+
+      <h2>4. Legitimación</h2>
+      <p>Tu consentimiento, que nos das al marcar la casilla del formulario, y nuestro interés legítimo en atender consultas comerciales que tú mismo nos inicias.</p>
+
+      <h2>5. Conservación</h2>
+      <p>Conservamos tus datos mientras dure el proceso comercial y, si no llega a haber relación contractual, durante 24 meses desde el último contacto, salvo que nos pidas antes que los eliminemos.</p>
+
+      <h2>6. Destinatarios</h2>
+      <p>No cedemos tus datos a terceros salvo obligación legal. El envío de estos correos se procesa a través de Microsoft 365, que actúa como encargado del tratamiento en el envío y almacenamiento de estos mensajes. Si se incorpora un proveedor de alojamiento (hosting) para el backend del formulario, se añadirá aquí en cuanto se confirme cuál es.</p>
+
+      <h2>7. Tus derechos</h2>
+      <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a dkagora@dktec.es. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es) si consideras que no hemos atendido tu solicitud correctamente.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+
+</body>
+</html>

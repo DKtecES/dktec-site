@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buen gobierno de IT — DKtec</title>
+<meta name="description" content="Tu riesgo tecnológico es riesgo de negocio. Vulnerabilidades, continuidad y decisiones claras.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/dktec-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/dktec-favicon-16.png">
+<link rel="apple-touch-icon" href="assets/dktec-apple-touch-icon.png">
+<link rel="stylesheet" href="assets/styles-dktec.css">
+<link rel="stylesheet" href="assets/styles-dktec-v2.css">
+<style>
+  /* "Segundo modo" (260824, a petición de Alán — mismos arreglos ya aplicados en tecnologias-v2.html):
+     mismo tratamiento "transparente" que #tecnologia-partners/#dogfooding de
+     assets/styles-dktec-v2.css (bloque "dkagora" de la home) — sin panel propio, texto claro
+     directamente sobre el verde fijo de la página. Alterna con el modo normal (panel claro, como
+     estaba toda la página hasta ahora), empezando por el 2º modo en el bloque superior (".page-hero").
+     Las tarjetas (.card) no cambian: siguen blancas y legibles sobre el verde. */
+  .transparent-block.section-wide, .transparent-block.page-hero{
+    background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none;
+    box-shadow:none; padding:0; margin:1rem auto;
+  }
+  .transparent-block > .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block > h1, .transparent-block > h2, .transparent-block > h3{ color:var(--blanco); }
+  .transparent-block > p{ color:rgba(255,255,255,0.92); }
+  /* 260824: por si algún bloque ".transparent-block" pasa a llevar el patrón de
+     ".text-with-placeholder-text" (título/párrafos ya no serían hijos directos, y las reglas ">" de
+     arriba dejarían de aplicarles el color blanco) — mismo recoloreo para ese caso anidado. */
+  .transparent-block .text-with-placeholder-text .eyebrow{ color:var(--verde-brillante); }
+  .transparent-block .text-with-placeholder-text h1,
+  .transparent-block .text-with-placeholder-text h2,
+  .transparent-block .text-with-placeholder-text h3{ color:var(--blanco); }
+  .transparent-block .text-with-placeholder-text p{ color:rgba(255,255,255,0.92); }
+
+  /* Placeholder de imagen (260824, a petición de Alán): caja gris de sustitución, a rellenar más
+     adelante con foto/ilustración real. Mismo criterio visual que ".qs-placeholder" de
+     quienes-somos.html.
+     260824 (2ª, a petición de Alán: "en vez de hacerlos tan anchos y estrechos, mueve textos para
+     que encajen de forma mas natural"): antes ocupaba todo el ancho de la sección con muy poca
+     altura (franja aplanada). Pasa a proporción 16:9 tipo foto, con un ancho máximo y centrado, para
+     que se vea como un hueco de imagen real y no como una franja de texto. */
+  .img-placeholder{
+    border:2px dashed var(--gris-claro); border-radius:1rem; background:#F2F2F2;
+    aspect-ratio:16/9;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.85rem; color:var(--gris-medio); text-align:center; padding:1rem;
+  }
+  /* 260824 (a petición de Alán: "pon las imagenes a la derecha del bloque de texto"): el texto y el
+     placeholder pasan a ir uno junto al otro en vez de apilados. Contenedor local propio (no
+     reutiliza ".section-split" del home para no depender de su comportamiento en breakpoints que no
+     he podido revisar aquí) — en pantallas estrechas el placeholder baja debajo del texto. */
+  .text-with-placeholder{ display:flex; align-items:stretch; gap:2rem; flex-wrap:wrap; margin-top:1rem; }
+  .text-with-placeholder > .text-with-placeholder-text{ flex:1 1 320px; }
+  .text-with-placeholder > .text-with-placeholder-text h2{ font-size:1.5rem; }
+  .text-with-placeholder > .img-placeholder{ flex:1 1 260px; max-width:340px; margin:0; aspect-ratio:unset; }
+  @media (max-width:700px){ .text-with-placeholder > .img-placeholder{ flex-basis:100%; max-width:none; } }
+</style>
+<!--
+  GEN-72 (Portal de DKtec, web dktec.es) · gobierno-it.html — página nueva (doc D-8, §10)
+  Ejecuta: Linus · Dirige/supervisa: Alán · Revisa: Melissa (PMO)
+  Requisitos: 20 WORKSPACE/Proyectos/GENESIS/GEN-72-requisitos-adicionales-tanda2-partners-y-paginas-de-linea_260806_1534.md §10
+
+  Público: CEO o propietario. Registro de negocio. Puerta comercial más rápida (presupuesto de
+  riesgo/continuidad ya medio aprobado en la cabeza del CEO).
+  Copy: borrador literal de Cassie/Linda (doc §10.1), pendiente del pulido final de Jimmy (T19).
+
+  CAUTELAS OBLIGATORIAS APLICADAS (doc §10.2):
+  - No se atribuye a DKtec un equipo propio de ciberseguridad: la ejecución se apoya en un partner
+    especializado que, por decisión de Jose (D-2), no se nombra todavía. La frase "nos apoyamos en
+    partners especializados para ejecutar" se mantiene tal cual pide el documento.
+  - No se inventan credenciales (sin ISO, sin certificaciones, sin nº de técnicos, sin casos de
+    cliente).
+  - Sin SLA ni tiempos de respuesta medibles.
+  - El seguro de RC profesional se mantiene visible, no al final.
+
+  noindex a propósito: página en borrador, sin cierre de copy ni validación legal (T23, Erin).
+
+  ACTUALIZACIÓN 260824 (a petición de Alán, "haz los mismos arreglos para la página de gobierno de
+  IT"): mismo tratamiento alternante normal/transparente que tecnologias-v2.html — ver ese fichero
+  para el detalle del razonamiento. Aquí solo dos secciones cambian: el bloque superior (".page-hero")
+  y "Lo que hacemos" pasan a ".transparent-block" (2º modo); "La pregunta no es..." y "Cómo trabajamos
+  esta línea" se quedan en modo normal tal como estaban. Resultado: transparente, normal,
+  transparente, normal — igual que el orden final de tecnologias-v2.html.
+
+  ACTUALIZACIÓN 260826 (a petición de Alán: "quita el placeholder de imagen"): en "La pregunta no es
+  si tu sistema es seguro..." se quita el placeholder ("riesgo tecnológico / continuidad de negocio")
+  — no hay foto real todavía (v1.0 §7, Linus no inventa contenido). El título y el párrafo dejan de
+  necesitar ".text-with-placeholder"/".text-with-placeholder-text" (era solo para ir junto al hueco de
+  imagen) y pasan a hijos directos de la sección, a todo el ancho.
+-->
+</head>
+<body>
+
+<div class="bg-fixed" aria-hidden="true"></div>
+
+
+<header>
+  <a class="logo-link" href="portal-dktec.html" aria-label="Ir a inicio"><img class="logo" src="assets/dktec-logo-blanco.png" alt="DKtec"></a>
+  <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="portal-dktec.html">Inicio</a>
+    <a href="servicios-ia.html">Servicios IA</a>
+    <a href="gobierno-it.html" aria-current="page">Gobierno de IT</a>
+    <a href="tecnologias.html">Tecnologías</a>
+    <a href="quienes-somos.html">Quiénes somos</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="header-actions">
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="transparent-block page-hero">
+    <span class="eyebrow">Buen gobierno de IT</span>
+    <h1>Tu riesgo tecnológico es riesgo de negocio. Tratémoslo como tal.</h1>
+  </section>
+
+  <section class="section-wide">
+    <h2>La pregunta no es si tu sistema es seguro. Es cuánto tiempo estarías parado.</h2>
+    <p>Casi ninguna empresa mediana sabe responder a esto con una cifra: si mañana cae el sistema que sostiene las ventas, o alguien cifra los ficheros, o el proveedor que lo mantiene deja de coger el teléfono — ¿cuántas horas? ¿cuántos días? ¿qué se pierde por el camino? Mientras esa respuesta no exista, el riesgo no está gestionado: está simplemente sin mirar.</p>
+  </section>
+
+  <section class="transparent-block section-wide">
+    <span class="eyebrow">Lo que hacemos</span>
+    <h2 style="margin-bottom:1.75rem;">Vulnerabilidades, riesgo de negocio y continuidad</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Vulnerabilidades — encontrar antes de que las encuentren</h3>
+        <p>Identificamos los puntos por donde tu tecnología puede ser atacada o puede fallar, y los corregimos. No una auditoría anual que acaba en un PDF: un ciclo de revisión y corrección.</p>
+      </div>
+      <div class="card">
+        <h3>Riesgo tecnológico como riesgo de negocio</h3>
+        <p>Traducimos el estado de tu tecnología a lo único que te importa: qué parte del negocio depende de qué, qué pasa si eso falla, y cuánto cuesta cada opción de arreglarlo. Con eso puedes decidir. Con un informe técnico, no.</p>
+      </div>
+      <div class="card">
+        <h3>Continuidad — saber qué se hace si algo falla</h3>
+        <p>Diseñamos el plan y, sobre todo, lo probamos. Un plan de continuidad que nadie ha ensayado no es un plan: es un documento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wide">
+    <span class="eyebrow">Cómo trabajamos esta línea</span>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Claridad, no complicaciones técnicas</h3>
+        <p>Te explicamos qué riesgo corres y qué hacemos para evitarlo, en tu idioma. Si necesitas leer un glosario para entender nuestro informe, el informe está mal escrito.</p>
+      </div>
+      <div class="card">
+        <h3>Respondemos nosotros</h3>
+        <p>Nos apoyamos en partners especializados para ejecutar, y gobernamos la entrega: tú tienes un interlocutor, no una lista de proveedores.</p>
+      </div>
+      <div class="card">
+        <h3>Con respaldo</h3>
+        <p>Contamos con seguro de responsabilidad civil profesional, con cobertura específica frente a la pérdida de datos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero" style="padding:4rem 1.5rem;">
+    <h2 style="color:var(--blanco);">¿Empezamos por saber dónde estás?</h2>
+    <a class="btn btn-primary" href="contacto.html">Hablemos</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner" style="position:relative;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;">DKtec — el socio de IT que te monta tu propio equipo de IA.</div>
+    <div style="margin-left:auto;"><a href="dktec-privacidad.html">Privacidad</a> · <a href="dktec-aviso-legal.html">Aviso legal</a></div>
+  </div>
+</footer>
+
+<script src="assets/nav-toggle.js"></script>
+
+</body>
+</html>
