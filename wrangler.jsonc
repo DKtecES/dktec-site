@@ -1,0 +1,37 @@
+{
+  // GEN-72 · dktec.es — configuración de despliegue en Cloudflare Workers (con activos
+  // estáticos), 2026-09-02, a petición de Alán.
+  //
+  // Por qué hace falta este fichero: el dashboard de Cloudflare ya no ofrece un flujo
+  // separado de "Pages" para proyectos nuevos — solo "Workers y Pages" unificado, que
+  // despliega con `wrangler deploy` y necesita saber explícitamente dónde están los
+  // ficheros estáticos y cómo servir la función de `/api/contacto`. Sin este fichero,
+  // `wrangler deploy` no tiene forma de saber qué desplegar.
+  //
+  // Cómo se usa (en el campo "Comando de compilación" del proyecto de Cloudflare):
+  //   npx wrangler pages functions build --outdir=./dist/worker/
+  // Ese comando compila `functions/api/contacto.js` (formato de Pages Functions) en un
+  // único script de Worker en ./dist/worker/index.js, que es lo que "main" apunta abajo.
+  // El campo "Implementar comando" se deja como está (`npx wrangler deploy`).
+  //
+  // "assets.directory": "./" sirve los ficheros estáticos desde la raíz del repo (donde
+  // están los .html y assets/) — esto también deja `functions/`, `wrangler.jsonc` y
+  // `BACKEND-README.md` técnicamente accesibles como ficheros estáticos sueltos. No
+  // contienen secretos (las credenciales van en variables de entorno de Cloudflare, no
+  // en el código), así que no es un problema de seguridad, solo un poco de ruido — se
+  // puede limpiar más adelante moviendo los .html/assets/ a una subcarpeta "public/" si
+  // se quiere más higiene.
+  //
+  // "run_worker_first": true hace que el Worker compilado (con la lógica de
+  // /api/contacto) se ejecute siempre primero, igual que hacía Pages — si no, Workers
+  // serviría los ficheros estáticos antes que la función y /api/contacto nunca llegaría
+  // a ejecutarse.
+  "name": "dktec-site",
+  "compatibility_date": "2026-09-02",
+  "main": "./dist/worker/index.js",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}
