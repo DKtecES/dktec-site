@@ -51,9 +51,13 @@
   parte (mismo proyecto de Cloudflare Pages que dkagora.ai, o proyecto aparte). Esto no lo decido
   yo: es infraestructura/despliegue, mandato de Vint.
 
-  Cloudflare Turnstile: se reutiliza la misma Site Key pública que dkagora.ai
-  (0x4AAAAAAD_zCqG7x2_En59R). Falta añadir dktec.es a los dominios autorizados en el panel de
-  Cloudflare, o crear un widget/Site Key propio — lo decide quien administre el panel (Vint).
+  Cloudflare Turnstile (actualizado 260902, a petición de Alán): dktec.es ya tiene su propia
+  Site Key, creada en un widget aparte del de dkagora.ai ("dktec-contacto", modo Gestionado,
+  hostnames dktec.es + dktec-site.francisco-delgado.workers.dev para pruebas antes de que el
+  dominio definitivo apunte aquí). Site Key pública: 0x4AAAAAAEkryQT883e2-NVB. La Secret Key
+  correspondiente la ha metido Alán directamente como TURNSTILE_SECRET_KEY en las variables de
+  entorno del proyecto de Cloudflare Workers "dktec-site" — no vive en ningún fichero de este
+  repo.
 
   Legal: aviso de privacidad enlaza a dktec-privacidad.html (borrador, pendiente de validación
   final de Erin).
@@ -163,7 +167,7 @@
         <span>He leído y acepto la <a href="dktec-privacidad.html">política de privacidad</a>.</span>
       </label>
       <!-- Cloudflare Turnstile — Site Key pública, ver nota de cabecera sobre dominios autorizados -->
-      <div class="cf-turnstile" data-sitekey="0x4AAAAAAD_zCqG7x2_En59R"></div>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAEkryQT883e2-NVB"></div>
       <p class="form-error" role="alert">Completa todos los campos.</p>
       <p class="form-success" role="status">Mensaje enviado. Te contactamos en 24-48&nbsp;h.</p>
       <button type="submit" class="btn btn-primary">Enviar mensaje</button>
